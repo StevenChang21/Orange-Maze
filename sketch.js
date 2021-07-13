@@ -16,7 +16,7 @@ function setup() {
 
 function draw() {
   background(51);
-  drawAllCellsInMaze(all_cells_in_maze, color(60, 60, 60), color(255,255,255));              //render the maze every update, pass in the array that holds all the cell so the function can draw out all the cells that is the array
+  drawAllCellsInMaze(all_cells_in_maze, color(60, 60, 60), color(255,255,0));              //render the maze every update, pass in the array that holds all the cell so the function can draw out all the cells that is the array
   renderPlayer(color(47, 194, 86), color(10, 36, 17));
   printLabel();
   frameRate(10)
