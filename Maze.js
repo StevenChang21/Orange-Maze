@@ -10,6 +10,10 @@ class Maze{
     this.columns_number = floor(height / cell_length);
   }
 
+  SetSize(cell_length){
+    this.cell_length = cell_length;
+  }
+
   Render(wall_color ,cell_color){
     for (let i = 0; i < this.all_cells.length; i++) {
       this.all_cells[i].Show(wall_color, cell_color);      

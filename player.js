@@ -53,7 +53,12 @@ class Player{
   }
 }
 
+let player;
+
 function keyPressed() {
+  if(!player){
+    player = gameSystem.player;
+  }
   if (keyCode == 87 && !player.cell_in.walls[0]) {
     player.Move(directions.TOP);
     return;
