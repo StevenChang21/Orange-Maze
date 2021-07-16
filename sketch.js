@@ -1,4 +1,5 @@
 let gameSystem;
+let difficulty_modifier = 2;
 
 function preload(){
   classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/z1D-tZeyu/" + 'model.json', function() {

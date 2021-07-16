@@ -7,7 +7,6 @@ class GameSystem{
         this.maze = maze;
         this.player = player;
         this.gameState = new PlayState(this);
-        this.destination = maze.GetCellByCoordinate(11, 10);
     }
 
     update(){

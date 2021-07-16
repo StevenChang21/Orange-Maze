@@ -5,12 +5,6 @@ class GameState{
         this.gameSystem = gameSystem;
         this.start();
     }
-
-    start(){
-    }
-
-    execute(){
-    }
 }
 
 class PlayState extends GameState{
@@ -21,6 +15,8 @@ class PlayState extends GameState{
     start(){
         this.gameSystem.maze.Generate();
         this.gameSystem.player.Spawn();
+        // Destination set next to player this.destination = this.gameSystem.maze.GetCellByCoordinate(this.gameSystem.maze.rows_number / 2 + 1, this.gameSystem.maze.columns_number / 2);
+        this.destination = this.gameSystem.maze.all_cells[this.gameSystem.maze.all_cells.length - 1];
     }
 
     execute(){
@@ -30,8 +26,8 @@ class PlayState extends GameState{
     }
 
     checkHasWon(){
-        this.gameSystem.destination.Show(color("black"), color("white"));
-        if(this.gameSystem.player.cell_in == this.gameSystem.destination){
+        this.destination.Show(color("black"), color("white"));
+        if(this.gameSystem.player.cell_in === this.destination){
             this.gameSystem.gameState = new WonState(this.gameSystem);
         }
     }
@@ -44,7 +40,11 @@ class WonState extends GameState{
 
     start(){
         const nextLevelButton = createButton("Next Level");
-        nextLevelButton.mousePressed();
+        nextLevelButton.mousePressed(()=>{
+            this.gameSystem.maze.SetSize(this.gameSystem.maze.cell_length * (1 - difficulty_modifier / 100), width, height);
+            this.gameSystem.gameState = new PlayState(this.gameSystem);
+            nextLevelButton.remove();
+        });
     }
 
     execute(){
