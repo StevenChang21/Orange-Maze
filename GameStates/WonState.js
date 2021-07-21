@@ -7,7 +7,7 @@ class WonState extends GameState {
         const nextLevelButton = createButton("Next Level");
         nextLevelButton.mousePressed(() => {
             this.gameSystem.maze.SetSize(this.gameSystem.maze.cell_length * (1 - difficulty_modifier / 100), width, height);
-            this.gameSystem.gameState = new PlayState(this.gameSystem);
+            this.gameSystem.switchState(new PlayState(this.gameSystem));
             nextLevelButton.remove();
         });
     }

@@ -11,15 +11,15 @@ class PlayState extends GameState {
     }
 
     execute() {
-        this.gameSystem.maze.Render(color(255, 255, 255), color(60, 60, 60));
-        this.gameSystem.player.Render(color(47, 194, 86), color(10, 36, 17));
+        this.gameSystem.maze.Render(color(244, 162, 97), color(38, 70, 83));
+        this.gameSystem.player.Render(null, color(42, 157, 143));
         this.checkHasWon();
     }
 
     checkHasWon() {
-        this.destination.Show(color("black"), color("white"));
+        this.destination.Show(color("black"), color(233, 196, 106));
         if (this.gameSystem.player.cell_in === this.destination) {
-            this.gameSystem.gameState = new WonState(this.gameSystem);
+            this.gameSystem.switchState(new WonState(this.gameSystem));
         }
     }
 }

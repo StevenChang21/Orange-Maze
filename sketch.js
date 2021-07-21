@@ -17,7 +17,7 @@ function setup() {
 } 
 
 function draw() {
-  background(51);
+  background(38, 70, 83);
   gameSystem.update();
   //printLabel();
   //PlayerMovementWithLabel();
