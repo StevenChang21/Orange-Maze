@@ -49,23 +49,17 @@ class Maze{
   }
   
   ConnectNeighbours(currentCell, neighbourCell) {                                 //Remove the walls to connect the cells(set the target side of the wall to value: False)
-    let dist_x = currentCell.x - neighbourCell.x;
-    if (dist_x === 1) {
-      currentCell.walls[3] = false;
-      neighbourCell.walls[1] = false;
-    } 
-    else if (dist_x === -1) {
-      currentCell.walls[1] = false;
-      neighbourCell.walls[3] = false;
-    }
-    let dist_y = currentCell.y - neighbourCell.y;
-    if (dist_y === 1) {
-      currentCell.walls[0] = false;
-      neighbourCell.walls[2] = false;
-    } 
-    else if (dist_y === -1) {
-      currentCell.walls[2] = false;
-      neighbourCell.walls[0] = false;
+    const bisectorOfDisplacement = createVector(currentCell.absolute_v.y - neighbourCell.absolute_v.y, neighbourCell.absolute_v.x - currentCell.absolute_v.x);
+    for (let i = 0; i < currentCell.walls.length; i++) {
+      let wall_vector = p5.Vector.sub(currentCell.walls[i].vertex1, currentCell.walls[i].vertex2)
+      if( wall_vector.dist(bisectorOfDisplacement) <= 0.1){
+        neighbourCell.walls[i].is_active = false;
+        let j = i + currentCell.walls.length / 2;
+        if(i >= currentCell.walls.length / 2){
+          j -= currentCell.walls.length;
+        }
+        currentCell.walls[j].is_active = false;
+      }
     }
   }
   
