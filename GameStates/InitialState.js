@@ -7,32 +7,12 @@ class InitialState extends GameState {
 	}
 
 	start() {
-		console.log("Loading first page");
+		console.log("Loading first page...");
 	}
 
 	execute() {
-		showText(
-			this.startPic,
-			width / 2,
-			height / 2 - 100,
-			60,
-			CENTER,
-			"Georgia",
-			color(233, 196, 106),
-			color(233, 196, 106),
-			1
-		);
-		showText(
-			this.instructionText,
-			width / 2,
-			height / 2 + 20,
-			30,
-			CENTER,
-			"Georgia",
-			color(233, 196, 106),
-			color(233, 196, 106),
-			1
-		);
+		showText(this.startPic, width / 2, height / 2 - 100, 60, CENTER, "Georgia", color(233, 196, 106), color(233, 196, 106), 1);
+		showText(this.instructionText, width / 2, height / 2 + 20, 30, CENTER, "Georgia", color(233, 196, 106), color(233, 196, 106), 1);
 	}
 }
 
@@ -50,7 +30,7 @@ function keyPressed() {
 	if (!(gameSystem.gameState instanceof InitialState)) {
 		return;
 	}
-	if (keyCode === ENTER) {
-		gameSystem.gameState = new PlayState(gameSystem);
+	if (keyCode === ENTER && gameSystem.ModelsReady()) {
+		gameSystem.ChangeState(PlayState);
 	}
 }

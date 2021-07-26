@@ -1,8 +1,9 @@
-class GameState{
-    gameSystem;
+class GameState {
+	gameSystem;
 
-    constructor(gameSystem){
-        this.gameSystem = gameSystem;
-        this.start();
-    }
+	constructor(gameSystem) {
+		this.gameSystem = gameSystem;
+		gameSystem.gameState = this;
+		this.start();
+	}
 }
