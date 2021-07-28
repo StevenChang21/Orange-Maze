@@ -3,8 +3,9 @@ class PlayState extends GameState {
 		super(gameSystem);
 	}
 
-	GotDirectionResults(results, gameSystem) {
+	GotDirectionResults(results, image, gameSystem) {
 		if (results[0].label === "Idle") {
+			label = results[0].label;
 			gameSystem.Classifiers[0].Classify(gameSystem, gameSystem.GetFlippedVideo(), gameSystem.gameState.GotDirectionResults);
 			return;
 		}
@@ -12,7 +13,7 @@ class PlayState extends GameState {
 		if (!classifier) {
 			return;
 		}
-		classifier.Classify(gameSystem, gameSystem.GetFlippedVideo(), (results, gameSystem) => {
+		classifier.Classify(gameSystem, image, (results, image, gameSystem) => {
 			label = results[0].label;
 			gameSystem.Classifiers[0].Classify(gameSystem, gameSystem.GetFlippedVideo(), gameSystem.gameState.GotDirectionResults);
 		});
@@ -30,13 +31,16 @@ class PlayState extends GameState {
 		this.gameSystem.maze.Render(color(244, 162, 97), color(38, 70, 83));
 		this.gameSystem.player.Render(color(42, 157, 143));
 		this.checkHasWon();
-		// image(this.gameSystem.GetFlippedVideo(), width - gameSystem.video.width, height - gameSystem.video.height);
+		if (!this.gameSystem.ClassifiedFlippedVideo) {
+			return;
+		}
+		image(this.gameSystem.ClassifiedFlippedVideo, width - gameSystem.video.width, height - gameSystem.video.height);
 	}
 
 	checkHasWon() {
 		this.destination.Show(color(233, 196, 106), color("black"));
 		if (this.gameSystem.player.cell_in === this.destination) {
-			gameSystem.gameState(WonState);
+			gameSystem.ChangeState(WonState);
 		}
 	}
 }

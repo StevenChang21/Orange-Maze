@@ -1,4 +1,6 @@
 class GameSystem {
+	ClassifiedFlippedVideo;
+
 	constructor(maze, player, classifiers) {
 		this.maze = maze;
 		this.player = player;

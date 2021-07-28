@@ -19,7 +19,7 @@ function setup() {
 
 function draw() {
 	background(38, 70, 83);
-	// checkUserInput();
+	checkUserInput();
 	gameSystem.update();
 	PlayerMovementWithLabel();
 	printLabel();

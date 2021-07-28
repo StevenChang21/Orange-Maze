@@ -21,7 +21,8 @@ class Classifier {
 		}
 		this.Value.classify(image)
 			.then((results) => {
-				gotResult(results, gameSystem);
+				gameSystem.ClassifiedFlippedVideo = image;
+				gotResult(results, image, gameSystem);
 			})
 			.catch((err) => console.log(err));
 	}
