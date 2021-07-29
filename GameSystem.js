@@ -15,7 +15,7 @@ class GameSystem {
 		this.gameState.execute();
 	}
 
-	ChangeState(state) {
+	changeState(state) {
 		new state(this);
 	}
 

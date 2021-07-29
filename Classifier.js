@@ -10,7 +10,7 @@ class Classifier {
 			.catch((err) => console.log(err));
 	}
 
-	Classify(gameSystem, image, gotResult) {
+	classify(gameSystem, image, gotResult) {
 		if (!image) {
 			console.warn("There is no image to classify!");
 			return;

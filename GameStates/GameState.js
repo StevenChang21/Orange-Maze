@@ -4,6 +4,5 @@ class GameState {
 	constructor(gameSystem) {
 		this.gameSystem = gameSystem;
 		gameSystem.gameState = this;
-		this.start();
 	}
 }
