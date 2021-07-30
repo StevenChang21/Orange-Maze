@@ -1,4 +1,10 @@
 class PlayState extends GameState {
+	imgUp = loadImage("./Images/Up.jpg");
+	imgDown = loadImage("./Images/Down.jpg");
+	imgLeft = loadImage("./Images/Left.jpg");
+	imgRight = loadImage("./Images/Right.jpg");
+	imgOpen = loadImage("./Images/Open.jpg");
+
 	constructor(gameSystem) {
 		super(gameSystem);
 		this.start();
@@ -55,8 +61,12 @@ class PlayState extends GameState {
 	}
 
 	execute() {
-		this.gameSystem.maze.Render(color(244, 162, 97), color(38, 70, 83));
-		this.gameSystem.player.Render(color(42, 157, 143));
+		background("#D18700");
+		this.printPicture();
+		tutorial();
+
+		this.gameSystem.maze.Render(color("red"), color("#FFB300"));
+		this.gameSystem.player.Render(color("#D92721"));
 		this.checkHasWon();
 		if (!this.gameSystem.ClassifiedFlippedVideo) {
 			return;
@@ -64,8 +74,16 @@ class PlayState extends GameState {
 		image(this.gameSystem.ClassifiedFlippedVideo, width - gameSystem.video.width, height - gameSystem.video.height);
 	}
 
+	printPicture() {
+		image(this.imgUp, 570, 0, 200, 185);
+		image(this.imgDown, 570, 225, 250, 175);
+		image(this.imgOpen, 570, 460, 250, 175);
+		image(this.imgLeft, 290, 460, 250, 175);
+		image(this.imgRight, 10, 460, 250, 175);
+	}
+
 	checkHasWon() {
-		this.destination.Show(color(233, 196, 106), color("black"));
+		this.destination.Show(color("grey"), color("grey"));
 		if (this.gameSystem.player.cell_in === this.destination) {
 			document.removeEventListener("visibilitychange", this.onVisibilityChange);
 			this.gameSystem.maze.clearCache();

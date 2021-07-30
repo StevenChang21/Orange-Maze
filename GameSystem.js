@@ -12,7 +12,10 @@ class GameSystem {
 	}
 
 	update() {
+		
 		this.gameState.execute();
+
+		
 	}
 
 	changeState(state) {

@@ -5,25 +5,34 @@ class WonState extends GameState {
 	}
 
 	start() {
-		const nextLevelButton = createButton("Next Level");
-		nextLevelButton.mousePressed(() => {
-			this.gameSystem.maze.SetSize(this.gameSystem.maze.cell_length * (1 - difficulty_modifier / 100), width - 320, height - 240);
-			this.gameSystem.changeState(PlayState);
+		 const nextLevelButton = createButton("Next Level");
+		 nextLevelButton.mousePressed(() => {
+		//if ( label == "Next"){ 
+			this.gameSystem.maze.SetSize(
+				this.gameSystem.maze.cell_length * (1 - difficulty_modifier / 100),
+				width - 320,
+				height - 240
+			);
+			gameSystem.gameState = new PlayState(this.gameSystem);
 			nextLevelButton.remove();
 		});
 	}
 
 	execute() {
+		background("#D18700")
 		showText(
 			"CONGRATS, You have cleared this level !!!",
 			width / 2,
 			height / 2,
-			15,
+			45,
 			CENTER,
 			"Georgia",
-			color(233, 196, 106),
-			color(233, 196, 106),
-			1
+			color(200),
+			color("black"),
+			2
 		);
+		
+
+
 	}
 }

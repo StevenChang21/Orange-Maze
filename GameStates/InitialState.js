@@ -1,18 +1,47 @@
 class InitialState extends GameState {
-	startPic = "Ready ?";
-	instructionText = "Put your hands up";
+	GameName = "Welcome to Orange Maze !"
+	instructionText = "Ready ? \n Open your hand to start the game ";
+
 
 	constructor(gameSystem) {
 		super(gameSystem);
 	}
 
+	start() {
+		console.log("Loading first page");
+		
+	}
+
 	execute() {
-		showText(this.startPic, width / 2, height / 2 - 100, 60, CENTER, "Georgia", color(233, 196, 106), color(233, 196, 106), 1);
-		showText(this.instructionText, width / 2, height / 2 + 20, 30, CENTER, "Georgia", color(233, 196, 106), color(233, 196, 106), 1);
+		background('#D18700')
+		showText(
+			this.GameName,
+			width / 2,
+			height / 2 - 200,
+			60,
+			CENTER,
+			"Georgia",
+			color(200),
+			color("black"),
+			3,
+		);
+
+		showText(
+			this.instructionText,
+			width / 2,
+			height / 2 + 20,
+			45,
+			CENTER,
+			"Georgia",
+			color(200),
+			color("black"),
+			2,
+		);
+
 	}
 }
 
-function showText(value, x, y, size, alignment, font, color, stroke_color, stroke_weight) {
+function showText(value, x, y, size, alignment, font, color, stroke_color, stroke_weight ) {
 	textSize(size);
 	textAlign(alignment);
 	textFont(font);
@@ -21,6 +50,7 @@ function showText(value, x, y, size, alignment, font, color, stroke_color, strok
 	strokeWeight(stroke_weight);
 	text(value, x, y);
 }
+
 
 function keyPressed() {
 	if (!(gameSystem.gameState instanceof InitialState)) {
