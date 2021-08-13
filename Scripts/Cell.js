@@ -1,8 +1,18 @@
 class Wall {
+	#vertexOne;
+	#vertexTwo;
+
 	constructor(vertex1, vertex2, is_active) {
-		this.vertex1 = createVector(vertex1.x, vertex1.y);
-		this.vertex2 = createVector(vertex2.x, vertex2.y);
+		this.#vertexOne = createVector(vertex1.x, vertex1.y);
+		this.#vertexTwo = createVector(vertex2.x, vertex2.y);
 		this.is_active = is_active;
+	}
+
+	get vertices() {
+		return {
+			vertexOne: this.#vertexOne,
+			vertexTwo: this.#vertexTwo,
+		};
 	}
 }
 
@@ -32,25 +42,16 @@ class Cell {
 		stroke(wall_color);
 		for (let i = 0; i < this.walls.length; i++) {
 			if (this.walls[i].is_active) {
-				const vertex1 = this.walls[i].vertex1;
-				const vertex2 = this.walls[i].vertex2;
-				line(vertex1.x, vertex1.y, vertex2.x, vertex2.y);
+				const wallVertices = this.walls[i].vertices;
+				line(wallVertices.vertexOne.x, wallVertices.vertexOne.y, wallVertices.vertexTwo.x, wallVertices.vertexTwo.y);
+			} else {
+				this.walls.splice(i, 1);
 			}
 		}
 
 		noStroke();
 		fill(cell_color);
 		rect(this.absolute_v.x, this.absolute_v.y, this.maze.cell_length, this.maze.cell_length);
-
-		if (debug) {
-			fill(255);
-			textSize(10);
-			text(
-				"x: " + this.vector.x + "\n y:" + this.vector.y,
-				this.absolute_v.x + this.maze.cell_length / 2,
-				this.absolute_v.y + this.maze.cell_length / 2
-			);
-		}
 	}
 
 	CheckNeighbors(visited_cells) {

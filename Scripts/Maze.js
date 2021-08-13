@@ -56,7 +56,8 @@ class Maze {
 			neighbourCell.absolute_v.x - currentCell.absolute_v.x
 		);
 		for (let i = 0; i < currentCell.walls.length; i++) {
-			let wall_vector = p5.Vector.sub(currentCell.walls[i].vertex1, currentCell.walls[i].vertex2);
+			const wallVetices = currentCell.walls[i].vertices;
+			let wall_vector = p5.Vector.sub(wallVetices.vertexOne, wallVetices.vertexTwo);
 			if (wall_vector.dist(bisectorOfDisplacement) <= 0.1) {
 				neighbourCell.walls[i].is_active = false;
 				let j = i + currentCell.walls.length / 2;
