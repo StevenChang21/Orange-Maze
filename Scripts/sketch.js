@@ -2,7 +2,7 @@ let game;
 let config;
 let debug = false;
 
-function preload() {
+async function preload() {
 	document.addEventListener("OnAllAssetsReady", () => {
 		game.gameState.gameStatus = "Ready to start game !!!";
 		game.gameState.instructionText = "Ready? Open your hand palm \n to start the game !!!";
@@ -29,15 +29,30 @@ function preload() {
 	config.loadAssets(
 		"Model",
 		{
-			Direction: "https://teachablemachine.withgoogle.com/models/nNtbYUnn-/", //"https://teachablemachine.withgoogle.com/models/7WRHgCGqz/",
-			Vertical: "https://teachablemachine.withgoogle.com/models/gvwdkEKSF/",
-			Horizontal: "https://teachablemachine.withgoogle.com/models/9r5lWuqRi/",
+			Direction: {
+				source: "https://teachablemachine.withgoogle.com/models/nNtbYUnn-/",
+				load: async function () {
+					return await ml5.imageClassifier(this.source + "model.json");
+				},
+			}, //"https://teachablemachine.withgoogle.com/models/7WRHgCGqz/",
+			Vertical: {
+				source: "https://teachablemachine.withgoogle.com/models/gvwdkEKSF/",
+				load: async function () {
+					return await ml5.imageClassifier(this.source + "model.json");
+				},
+			},
+			Horizontal: {
+				source: "https://teachablemachine.withgoogle.com/models/9r5lWuqRi/",
+				load: async function () {
+					return await ml5.imageClassifier(this.source + "model.json");
+				},
+			},
 		},
 		(source) => {
 			let models = {};
 			for (const key in source) {
-				const model = new classifier(key, source[key], () => config.onAssetReady());
-				models[key] = model;
+				const model = await source[key].load().catch((err) => console.log(err));
+				const classifier = new classifier(key, model);
 			}
 			return models;
 		}
