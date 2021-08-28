@@ -35,6 +35,7 @@ class PlayState extends GameState {
 
 		resizeCanvas(1500, 700);
 		const m_classifier = this.gameSystem.getClassifierByName("Direction");
+		console.log(m_classifier);
 	}
 
 	listenToVisibilityChangedChannel() {

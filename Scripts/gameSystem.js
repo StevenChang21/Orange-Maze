@@ -15,7 +15,6 @@ class gameSystem {
 
 	getClassifierByName(name) {
 		const classifiers = this.assets.getChildAssetByType("Model").data;
-		console.log(classifiers);
 		for (const key in classifiers) {
 			if (key === name) {
 				return classifiers[key];

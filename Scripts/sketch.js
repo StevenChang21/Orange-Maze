@@ -33,18 +33,21 @@ function preload() {
 		{
 			Direction: {
 				source: "https://teachablemachine.withgoogle.com/models/nNtbYUnn-/",
+				instanceName: "imageClassifier",
 				load: async function () {
 					return await ml5.imageClassifier(this.source + "model.json");
 				},
 			}, //"https://teachablemachine.withgoogle.com/models/7WRHgCGqz/",
 			Vertical: {
 				source: "https://teachablemachine.withgoogle.com/models/gvwdkEKSF/",
+				instanceName: "imageClassifier",
 				load: async function () {
 					return await ml5.imageClassifier(this.source + "model.json");
 				},
 			},
 			Horizontal: {
 				source: "https://teachablemachine.withgoogle.com/models/9r5lWuqRi/",
+				instanceName: "imageClassifier",
 				load: async function () {
 					return await ml5.imageClassifier(this.source + "model.json");
 				},
@@ -53,6 +56,7 @@ function preload() {
 		(source) => {
 			let models = {};
 			for (const key in source) {
+				const $classifier = eval(`new ${source[key].instanceName}(key)`);
 				source[key]
 					.load()
 					.then((loadedModel) => {
@@ -60,7 +64,6 @@ function preload() {
 						config.onAssetReady();
 					})
 					.catch((err) => console.log(err));
-				const $classifier = new classifier(key, null);
 				models[key] = $classifier;
 			}
 			return models;
