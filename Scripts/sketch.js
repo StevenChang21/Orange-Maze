@@ -50,12 +50,17 @@ function preload() {
 				},
 			},
 		},
-		async (source) => {
+		(source) => {
 			let models = {};
 			for (const key in source) {
-				const model = await source[key].load().catch((err) => console.log(err));
-				config.onAssetReady();
-				const $classifier = new classifier(key, model);
+				source[key]
+					.load()
+					.then((loadedModel) => {
+						$classifier.model = loadedModel;
+						config.onAssetReady();
+					})
+					.catch((err) => console.log(err));
+				const $classifier = new classifier(key, null);
 				models[key] = $classifier;
 			}
 			return models;

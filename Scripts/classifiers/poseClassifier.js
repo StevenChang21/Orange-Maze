@@ -5,8 +5,8 @@ class poseClassifier extends classifier {
 
 	async classify(data) {
 		super.classify(data);
-		const { pose, posenetOutput } = await this._model.estimatePose(data);
-		const prediction = await this._model.predict(posenetOutput);
+		const { pose, posenetOutput } = await this.model.estimatePose(data);
+		const prediction = await this.model.predict(posenetOutput);
 		console.log(prediction[0].className);
 		return {
 			label: prediction[0].className,

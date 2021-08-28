@@ -1,6 +1,6 @@
 class classifier {
 	_name;
-	_model;
+	model;
 
 	get name() {
 		return this._name;
@@ -8,7 +8,7 @@ class classifier {
 
 	constructor(name, model) {
 		this._name = name;
-		this._model = model;
+		this.model = model;
 	}
 
 	async classify(data) {
