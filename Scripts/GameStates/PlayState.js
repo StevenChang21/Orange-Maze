@@ -35,7 +35,7 @@ class PlayState extends GameState {
 
 		resizeCanvas(1500, 700);
 		this.gameSystem
-			.getClassifierByName("Direction")
+			.getClassifierByName("Vertical")
 			.classify(this.gameSystem.getFlippedVideo())
 			.then((prediction) => {
 				resultsHandler.handle(prediction);
