@@ -2,7 +2,7 @@ let game;
 let config;
 let debug = false;
 
-async function preload() {
+function preload() {
 	document.addEventListener("OnAllAssetsReady", () => {
 		game.gameState.gameStatus = "Ready to start game !!!";
 		game.gameState.instructionText = "Ready? Open your hand palm \n to start the game !!!";
@@ -13,6 +13,7 @@ async function preload() {
 
 	config = new configuration();
 
+	//Imaged
 	config.loadAssets(
 		"Image",
 		{ Up: "./Images/Up.jpeg", Down: "./Images/Down.jpeg", Open: "./Images/Open.jpg", Left: "./Images/Left.jpeg", Right: "./Images/Right.jpeg" },
@@ -26,6 +27,7 @@ async function preload() {
 		}
 	);
 
+	//Models
 	config.loadAssets(
 		"Model",
 		{
@@ -48,11 +50,13 @@ async function preload() {
 				},
 			},
 		},
-		(source) => {
+		async (source) => {
 			let models = {};
 			for (const key in source) {
 				const model = await source[key].load().catch((err) => console.log(err));
-				const classifier = new classifier(key, model);
+				config.onAssetReady();
+				const $classifier = new classifier(key, model);
+				models[key] = $classifier;
 			}
 			return models;
 		}
@@ -73,6 +77,7 @@ async function preload() {
 		difficultyAcceleration: 0.5,
 	});
 
+	//Colors
 	config.loadAssets(
 		"Color",
 		{

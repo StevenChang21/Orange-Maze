@@ -1,13 +1,13 @@
 class classifier {
-	#name;
+	_name;
 	_model;
 
 	get name() {
-		return this.#name;
+		return this._name;
 	}
 
 	constructor(name, model) {
-		this.#name = name;
+		this._name = name;
 		this._model = model;
 	}
 
