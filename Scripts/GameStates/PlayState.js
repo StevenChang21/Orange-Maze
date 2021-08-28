@@ -34,7 +34,7 @@ class PlayState extends GameState {
 		};
 
 		resizeCanvas(1500, 700);
-		this.gameSystem.getClassifierByName("Direction").classify(this.gameSystem.getFlippedVideo());
+		const m_classifier = this.gameSystem.getClassifierByName("Direction");
 	}
 
 	listenToVisibilityChangedChannel() {
