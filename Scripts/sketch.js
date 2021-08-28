@@ -39,12 +39,12 @@ function preload() {
 				},
 			}, //"https://teachablemachine.withgoogle.com/models/7WRHgCGqz/",
 			Vertical: {
-				source: "https://teachablemachine.withgoogle.com/models/gvwdkEKSF/",
-				instanceName: "imageClassifier",
+				source: "https://teachablemachine.withgoogle.com/models/usJYipx_l/",
+				instanceName: "poseClassifier",
 				load: async function () {
-					return await ml5.imageClassifier(this.source + "model.json");
+					return await tmPose.load(`${this.source}model.json`, `${this.source}metadata.json`);
 				},
-			},
+			}, //"https://teachablemachine.withgoogle.com/models/gvwdkEKSF/",
 			Horizontal: {
 				source: "https://teachablemachine.withgoogle.com/models/9r5lWuqRi/",
 				instanceName: "imageClassifier",
