@@ -34,8 +34,12 @@ class PlayState extends GameState {
 		};
 
 		resizeCanvas(1500, 700);
-		const m_classifier = this.gameSystem.getClassifierByName("Direction");
-		console.log(m_classifier);
+		this.gameSystem
+			.getClassifierByName("Direction")
+			.classify(this.gameSystem.getFlippedVideo())
+			.then((prediction) => {
+				resultsHandler.handle(prediction);
+			});
 	}
 
 	listenToVisibilityChangedChannel() {

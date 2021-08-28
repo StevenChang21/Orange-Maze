@@ -1,51 +1,47 @@
-class UP {
-	static respond(info) {
-		const classifier = info.gameSystem.getClassifierByName("Direction");
-		info.gameSystem.gameState.prediction = info.results[0].label;
-		info.gameSystem.player.Move("Up", () =>
-			classifier.classify({
-				gameSystem: info.gameSystem,
-				image: info.gameSystem.getFlippedVideo(),
+class DIRECTIONAL {
+	static respond({ result, direction }) {
+		const classifier = game.getClassifierByName("Direction");
+		game.gameState.prediction = result.label;
+		game.player.Move(direction, () =>
+			classifier.classify(game.getFlippedVideo()).then((result) => {
+				resultsHandler.handle(result);
 			})
 		);
+	}
+}
+
+class UP {
+	static respond(result) {
+		DIRECTIONAL.respond({
+			result,
+			direction: "Up",
+		});
 	}
 }
 
 class DOWN {
-	static respond(info) {
-		const classifier = info.gameSystem.getClassifierByName("Direction");
-		info.gameSystem.gameState.prediction = info.results[0].label;
-		info.gameSystem.player.Move("Down", () =>
-			classifier.classify({
-				gameSystem: info.gameSystem,
-				image: info.gameSystem.getFlippedVideo(),
-			})
-		);
+	static respond(result) {
+		DIRECTIONAL.respond({
+			result,
+			direction: "Down",
+		});
 	}
 }
 
 class LEFT {
-	static respond(info) {
-		const classifier = info.gameSystem.getClassifierByName("Direction");
-		info.gameSystem.gameState.prediction = info.results[0].label;
-		info.gameSystem.player.Move("Left", () =>
-			classifier.classify({
-				gameSystem: info.gameSystem,
-				image: info.gameSystem.getFlippedVideo(),
-			})
-		);
+	static respond(result) {
+		DIRECTIONAL.respond({
+			result,
+			direction: "Left",
+		});
 	}
 }
 
 class RIGHT {
-	static respond(info) {
-		const classifier = info.gameSystem.getClassifierByName("Direction");
-		info.gameSystem.gameState.prediction = info.results[0].label;
-		info.gameSystem.player.Move("Right", () =>
-			classifier.classify({
-				gameSystem: info.gameSystem,
-				image: info.gameSystem.getFlippedVideo(),
-			})
-		);
+	static respond(result) {
+		DIRECTIONAL.respond({
+			result,
+			direction: "Right",
+		});
 	}
 }

@@ -1,9 +1,8 @@
 class VERTICAL {
 	static respond(info) {
-		const classifier = info.gameSystem.getClassifierByName(info.results[0].label);
-		classifier.classify({
-			gameSystem: info.gameSystem,
-			image: info.gameSystem.getFlippedVideo(),
+		const classifier = game.getClassifierByName("Vertical");
+		classifier.classify(game.getFlippedVideo()).then((results) => {
+			resultsHandler.handle(results);
 		});
 	}
 }
