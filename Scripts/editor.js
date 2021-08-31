@@ -1,9 +1,13 @@
 function runEditor() {
 	const buttons = [];
 
-	const setColorsButton = createButton("Set colors");
+	const editorButtons = Array.from(document.querySelectorAll(".editor-button"));
+	editorButtons.forEach((button) => {
+		button.style.display = "inline";
+	});
+	const setColorsButton = document.querySelector("#customise-color-button");
+	const useSavedColorButton = document.querySelector("#use-save-color-button");
 	const saveColorsButton = createButton("Save colors");
-	const useSavedColorButton = createButton("Use saved color");
 
 	buttons.push(setColorsButton, saveColorsButton, useSavedColorButton);
 

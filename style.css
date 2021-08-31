@@ -27,3 +27,7 @@ html {
 .button {
 	background: rgb(255, 217, 0);
 }
+
+.editor-button {
+	display: none;
+}
