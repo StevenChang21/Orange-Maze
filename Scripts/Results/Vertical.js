@@ -1,9 +1,13 @@
 class VERTICAL {
-	static respond(info) {
-		const classifier = info.gameSystem.getClassifierByName(info.results[0].label);
-		classifier.classify({
-			gameSystem: info.gameSystem,
-			image: info.gameSystem.getFlippedVideo(),
-		});
+	static respond() {
+		const classifier = game.getClassifierByName("Vertical");
+		classifier
+			.classify(game.getAsset("Video"))
+			.then((results) => {
+				resultsHandler.handle(results);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 }

@@ -1,11 +1,10 @@
 class OPEN {
 	static respond(info) {
-		const classifier = info.gameSystem.getClassifierByName("Direction");
-		info.gameSystem.gameState.prediction = info.results[0].label;
-		info.gameSystem.player.summonWallDestroyer(() =>
-			classifier.classify({
-				gameSystem: info.gameSystem,
-				image: info.gameSystem.getFlippedVideo(),
+		const classifier = game.getClassifierByName("Direction");
+		game.gameState.prediction = info.label;
+		game.player.summonWallDestroyer(() =>
+			classifier.classify(game.getFlippedVideo()).then((results) => {
+				resultsHandler.handle(results);
 			})
 		);
 	}

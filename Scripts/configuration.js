@@ -19,7 +19,6 @@ class configuration {
 	}
 
 	loadAssets(assetType, sources, getData = undefined) {
-		const sourceAssets = new assets(assetType);
 		this.assetCount += Object.keys(sources).length;
 		const dataGetter = getData
 			? getData
@@ -28,7 +27,7 @@ class configuration {
 					this.onAssetReady();
 					return sources;
 			  };
-		sourceAssets.insertData(dataGetter(sources));
+		const sourceAssets = new assets(assetType, dataGetter(sources));
 		this.assets.childAssets.push(sourceAssets);
 	}
 
@@ -42,13 +41,16 @@ class configuration {
 }
 
 class assets {
-	constructor(type) {
-		this.type = type;
-		this.childAssets = [];
+	#data;
+
+	get data() {
+		return this.#data;
 	}
 
-	insertData(data) {
-		this.data = data;
+	constructor(type, data) {
+		this.type = type;
+		this.#data = data;
+		this.childAssets = [];
 	}
 
 	getChildAssetByType(type) {

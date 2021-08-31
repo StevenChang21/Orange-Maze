@@ -1,5 +1,4 @@
-let game;
-let config;
+let game, config;
 let debug = false;
 
 function preload() {
@@ -13,6 +12,7 @@ function preload() {
 
 	config = new configuration();
 
+	//Images
 	config.loadAssets(
 		"Image",
 		{ Up: "./Images/Up.jpeg", Down: "./Images/Down.jpeg", Open: "./Images/Open.jpg", Left: "./Images/Left.jpeg", Right: "./Images/Right.jpeg" },
@@ -26,18 +26,41 @@ function preload() {
 		}
 	);
 
+	//Models
 	config.loadAssets(
 		"Model",
 		{
-			Direction: "https://teachablemachine.withgoogle.com/models/nNtbYUnn-/", //"https://teachablemachine.withgoogle.com/models/7WRHgCGqz/",
-			Vertical: "https://teachablemachine.withgoogle.com/models/gvwdkEKSF/",
-			Horizontal: "https://teachablemachine.withgoogle.com/models/9r5lWuqRi/",
+			Direction: {
+				source: "https://teachablemachine.withgoogle.com/models/WXBWVjQDX/", //"https://teachablemachine.withgoogle.com/models/nNtbYUnn-/",
+				instanceName: "imageClassifier",
+			}, //"https://teachablemachine.withgoogle.com/models/7WRHgCGqz/",
+			Vertical: {
+				source: {
+					model: "../Models/model.json",
+					metadata: "../Models/model_meta.json",
+					weights: "../Models/model.weights.bin",
+				},
+				instanceName: "poseClassifier",
+			}, //"https://teachablemachine.withgoogle.com/models/gvwdkEKSF/",
+			Horizontal: {
+				source: "https://teachablemachine.withgoogle.com/models/9r5lWuqRi/",
+				instanceName: "imageClassifier",
+			},
 		},
 		(source) => {
 			let models = {};
 			for (const key in source) {
-				const model = new classifier(key, source[key], () => config.onAssetReady());
-				models[key] = model;
+				const $classifier = eval(`new ${source[key].instanceName}(key)`);
+				$classifier
+					.load(source[key].source)
+					.then((loadedModel) => {
+						if (loadedModel) {
+							$classifier.model = loadedModel;
+						}
+						config.onAssetReady();
+					})
+					.catch((err) => console.log(err));
+				models[key] = $classifier;
 			}
 			return models;
 		}
@@ -48,7 +71,7 @@ function preload() {
 		const video = createCapture(source.video, () => {
 			config.onAssetReady();
 		}).hide();
-		video.size(240, 180);
+		video.size(640, 360);
 		return video;
 	});
 
@@ -58,6 +81,7 @@ function preload() {
 		difficultyAcceleration: 0.5,
 	});
 
+	//Colors
 	config.loadAssets(
 		"Color",
 		{

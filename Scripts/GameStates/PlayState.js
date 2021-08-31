@@ -1,7 +1,6 @@
 class PlayState extends GameState {
 	directionClassifier;
-	width2 = 1500;
-	height2 = 700;
+
 	constructor(gameSystem) {
 		super(gameSystem);
 		this.start();
@@ -14,7 +13,7 @@ class PlayState extends GameState {
 		// Destination set next to player this.destination = this.gameSystem.maze.GetCellByCoordinate(this.gameSystem.maze.rows_number / 2 + 1, this.gameSystem.maze.columns_number / 2);
 		this.destination = this.gameSystem.maze.all_cells[this.gameSystem.maze.all_cells.length - 1];
 
-		const imageAssets = this.gameSystem.assets.getChildAssetByType("Image").data;
+		const imageAssets = this.gameSystem.getAsset("Image");
 
 		this.referenceImage = {
 			Up: imageAssets.Up,
@@ -24,7 +23,7 @@ class PlayState extends GameState {
 			Right: imageAssets.Right,
 		};
 
-		const colorAssets = this.gameSystem.assets.getChildAssetByType("Color").data;
+		const colorAssets = this.gameSystem.getAsset("Color");
 
 		this.gameColour = {
 			maze: colorAssets.maze,
@@ -34,10 +33,12 @@ class PlayState extends GameState {
 		};
 
 		resizeCanvas(1500, 700);
-		this.gameSystem.getClassifierByName("Direction").classify({
-			gameSystem: this.gameSystem,
-			image: this.gameSystem.getFlippedVideo(),
-		});
+		this.gameSystem
+			.getClassifierByName("Direction")
+			.classify(this.gameSystem.getFlippedVideo())
+			.then((prediction) => {
+				resultsHandler.handle(prediction);
+			});
 	}
 
 	listenToVisibilityChangedChannel() {
@@ -56,10 +57,12 @@ class PlayState extends GameState {
 
 	continue() {
 		this.listenToVisibilityChangedChannel();
-		this.gameSystem.getClassifierByName("Direction").classify({
-			gameSystem: this.gameSystem,
-			image: this.gameSystem.getFlippedVideo(),
-		});
+		this.gameSystem
+			.getClassifierByName("Direction")
+			.classify(this.gameSystem.getFlippedVideo())
+			.then((prediction) => {
+				resultsHandler.handle(prediction);
+			});
 	}
 
 	pause(source) {
@@ -71,15 +74,15 @@ class PlayState extends GameState {
 	execute() {
 		this.displayPicture();
 		tutorial();
+		image(this.gameSystem.getFlippedVideo(), width - 700, 200);
 
 		this.gameSystem.maze.Render(this.gameColour.mazeWall, this.gameColour.maze);
 		this.gameSystem.player.Render(this.gameColour.player);
 		this.checkHasWon();
-		image(this.gameSystem.getFlippedVideo(), this.width2 / 2 + 200, 150, 500, 400);
 
 		if (!this.prediction) return;
 		fill(50);
-		text(this.prediction, (this.width2 * 4) / 5, this.height2 - 100);
+		text(this.prediction, width - 400, 150);
 	}
 
 	displayPicture() {
@@ -97,5 +100,11 @@ class PlayState extends GameState {
 			this.gameSystem.maze.clearCache();
 			this.gameSystem.changeState(WonState);
 		}
+	}
+}
+
+function keyPressed() {
+	if (game.gameState instanceof PlayState && key == "p") {
+		game.gameState.pause(game.gameState);
 	}
 }

@@ -5,6 +5,10 @@ class gameSystem {
 		this.gameState = new InitialState(this);
 	}
 
+	getAsset(type) {
+		return this.assets.getChildAssetByType(type).data;
+	}
+
 	update() {
 		this.gameState.execute();
 	}
@@ -24,7 +28,8 @@ class gameSystem {
 	}
 
 	getFlippedVideo() {
-		this.video = this.assets.getChildAssetByType("Video").data;
-		return ml5.flipImage(this.video);
+		const vid = this.assets.getChildAssetByType("Video").data;
+		const flippedVid = ml5.flipImage(vid);
+		return flippedVid;
 	}
 }

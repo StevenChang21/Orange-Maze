@@ -44,8 +44,6 @@ class Cell {
 			if (this.walls[i].is_active) {
 				const wallVertices = this.walls[i].vertices;
 				line(wallVertices.vertexOne.x, wallVertices.vertexOne.y, wallVertices.vertexTwo.x, wallVertices.vertexTwo.y);
-			} else {
-				this.walls.splice(i, 1);
 			}
 		}
 

@@ -1,16 +1,17 @@
 class resultsHandler {
-	static handle(info) {
-		const results = info.results[0].label.toUpperCase();
+	static handle(prediction) {
+		const results = prediction.label.toUpperCase();
 		const resultsObject = eval(`${results}`);
 		if (!resultsObject) {
 			console.log("Result is invalid !!!");
 			return;
 		}
-		const currentGameState = info.gameSystem.gameState;
+		const currentGameState = game.gameState;
 		if (!(currentGameState instanceof PlayState)) {
 			console.log(`Respond aborted as current game state is not in play state!!!`);
 			return;
 		}
-		resultsObject.respond(info);
+		// console.log(results);
+		resultsObject.respond(prediction);
 	}
 }

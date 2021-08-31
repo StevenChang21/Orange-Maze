@@ -1,9 +1,8 @@
 class HORIZONTAL {
-	static respond(info) {
-		const classifier = info.gameSystem.getClassifierByName(info.results[0].label);
-		classifier.classify({
-			gameSystem: info.gameSystem,
-			image: info.gameSystem.getFlippedVideo(),
+	static respond() {
+		const classifier = game.getClassifierByName("Horizontal");
+		classifier.classify(game.getFlippedVideo()).then((results) => {
+			resultsHandler.handle(results);
 		});
 	}
 }

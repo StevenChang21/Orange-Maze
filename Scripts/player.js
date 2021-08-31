@@ -5,6 +5,7 @@ class Player {
 		this.maze = maze;
 		this.cell_in = spawning_point ? maze.GetCellByCoordinate(spawning_point.x, spawning_point.y) : maze.GetCellByCoordinate(0, 0);
 		this.target_cell = this.cell_in;
+		this.isMoving = false;
 
 		if (!this.cell_in) {
 			console.error("Player is not spawn in a maze !\nThe game cannot start!");
@@ -15,7 +16,7 @@ class Player {
 	}
 
 	summonWallDestroyer(onDestroyedWalls) {
-		console.log("Summoning wall destroyer");
+		//console.log("Summoning wall destroyer");
 		onDestroyedWalls();
 	}
 
@@ -23,6 +24,7 @@ class Player {
 		if (this.target_cell.vector.dist(this.cell_in.vector) > 0) {
 			this.position.lerp(this.target_cell.absolute_v, this.speed * deltaTime * 0.001);
 			if (this.target_cell.absolute_v.dist(this.position) <= 0.01) {
+				this.isMoving = false;
 				this.cell_in = this.target_cell;
 				this.onReachDestination();
 			}
@@ -40,10 +42,10 @@ class Player {
 	}
 
 	Move(direction, onReachDestination) {
-		if (this.blockByWall(direction) || this.target_cell !== this.cell_in) {
-			onReachDestination();
+		if (this.blockByWall(direction) || this.isMoving) {
 			return;
 		}
+		this.isMoving = true;
 		const movingDir = directions[direction];
 		const targetCellPosition = p5.Vector.add(createVector(movingDir.x, movingDir.y), this.cell_in.vector);
 		this.target_cell = this.maze.GetCellByCoordinate(targetCellPosition.x, targetCellPosition.y);
@@ -52,6 +54,7 @@ class Player {
 
 	blockByWall(direction) {
 		const wallIndex = Object.keys(directions).indexOf(direction);
+		if (!this.cell_in.walls[wallIndex]) return true;
 		return this.cell_in.walls[wallIndex].is_active;
 	}
 }
