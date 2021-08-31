@@ -50,8 +50,13 @@
 			<h2 style="text-decoration: underline">Game</h2>
 			<div class="container-item">
 				<div id="canvas-container"></div>
-				<button class="button editor-button" id="customise-color-button">Customise game color</button>
-				<button class="button editor-button" id="use-save-color-button">Use saved color</button>
+				<div id="editor-container">
+					<button class="editor-button show-onReady" id="customise-color-button">Customise game color</button>
+					<button class="close-button" style="display: none" id="customise-color-close">X</button>
+					<div id="color-customisation-container" style="display: none"></div>
+					<button class="editor-button show-onReady" id="use-save-color-button">Use saved color</button>
+					<button class="editor-button" id="save-color-button">Save color</button>
+				</div>
 			</div>
 		</div>
 	</body>
