@@ -14,6 +14,8 @@ function runEditor() {
 	const closeSetColorsButton = document.querySelector("#customise-color-close");
 
 	const useSavedColorButton = document.querySelector("#use-save-color-button");
+	const closeUseSavedColorButton = document.querySelector("#use-save-color-close");
+
 	const saveColorsButton = document.querySelector("#save-color-button");
 	const editorContainer = document.querySelector("#editor-container");
 	const colorCustomisationContainer = document.querySelector("#color-customisation-container");
@@ -36,7 +38,7 @@ function runEditor() {
 		});
 		saveColorsButton.style.display = "none";
 		closeSetColorsButton.style.display = "none";
-		document.querySelectorAll("input").forEach((input) => input.remove());
+		document.querySelectorAll("input[type=color]").forEach((input) => input.remove());
 		document.querySelectorAll("p").forEach((p) => p.remove());
 	});
 
@@ -45,37 +47,43 @@ function runEditor() {
 		const colorPickers = document.querySelectorAll("input");
 		const colorLabel = document.querySelectorAll("p");
 		for (let i = 0; i < colorPickers.length; i++) {
+			if (!colorLabel[i]) continue;
 			data[colorLabel[i].innerHTML] = hexToRgb(colorPickers[i].value);
 		}
 		createStringDict(data).saveJSON("m_Colors");
 	});
 
-	useSavedColorButton.mousePressed(() => {
-		const fileInput = createFileInput((file) => {
-			if (file.type !== "application") {
-				console.log("File type is invalid !!!");
-				return;
-			}
-			const colorAsset = config.assets.getChildAssetByType("Color").data;
-			loadJSON(file.data, (data) => {
-				for (const key in data) {
-					colorAsset[key].levels = data[key].levels;
-				}
-			});
-		});
+	const colorFileInput = document.querySelector("#color-file-input");
 
-		fileInput.position(useSavedColorButton.position().x, useSavedColorButton.position().y);
-		useSavedColorButton.hide();
-		createCloseButton(
-			{
-				x: fileInput.position().x,
-				y: fileInput.position().y + fileInput.size().height,
-			},
-			() => {
-				fileInput.remove();
-				useSavedColorButton.show();
+	colorFileInput.addEventListener("input", (e) => {
+		const reader = new FileReader();
+		reader.onload = () => {
+			const colorData = JSON.parse(reader.result);
+			const colorAsset = config.assets.getChildAssetByType("Color").data;
+			for (const key in colorData) {
+				colorAsset[key].levels[0] = colorData[key].r;
+				colorAsset[key].levels[1] = colorData[key].g;
+				colorAsset[key].levels[2] = colorData[key].b;
 			}
-		);
+		};
+		reader.readAsText(e.target.files[0]);
+	});
+
+	useSavedColorButton.addEventListener("click", () => {
+		editorContainer.children.forEach((child) => {
+			child.style.display = "none";
+		});
+		colorFileInput.style.display = "inline";
+		closeUseSavedColorButton.style.display = "inline";
+		editorContainer.style.justifyContent = "space-between";
+	});
+
+	closeUseSavedColorButton.addEventListener("click", (e) => {
+		e.target.style.display = "none";
+		colorFileInput.style.display = "none";
+		initialButtons.forEach((child) => {
+			child.style.display = "inline";
+		});
 	});
 }
 
@@ -107,12 +115,4 @@ function showColors(colorData, parent) {
 	}
 	parent.style.gridTemplateColumns = value;
 	return { colorPickers, colorLabels };
-}
-
-function createCloseButton(position, onExit) {
-	const closeButton = createButton("Close").position(position.x, position.y);
-	closeButton.mousePressed(() => {
-		closeButton.remove();
-		onExit();
-	});
 }
