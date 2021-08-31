@@ -103,7 +103,7 @@ function preload() {
 }
 
 function setup() {
-	createCanvas(900, 700);
+	createCanvas(900, 700).parent("canvas-container");
 	const maze = new Maze(50, 580, 460);
 	game = new gameSystem(maze, new Player());
 }
