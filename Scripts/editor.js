@@ -39,13 +39,13 @@ function runEditor() {
 		saveColorsButton.style.display = "none";
 		closeSetColorsButton.style.display = "none";
 		document.querySelectorAll("input[type=color]").forEach((input) => input.remove());
-		document.querySelectorAll("p").forEach((p) => p.remove());
+		document.querySelectorAll(".colorLabel").forEach((p) => p.remove());
 	});
 
 	saveColorsButton.addEventListener("click", (e) => {
 		const data = {};
-		const colorPickers = document.querySelectorAll("input");
-		const colorLabel = document.querySelectorAll("p");
+		const colorPickers = document.querySelectorAll("input[type=color]");
+		const colorLabel = document.querySelectorAll(".colorLabel");
 		for (let i = 0; i < colorPickers.length; i++) {
 			if (!colorLabel[i]) continue;
 			data[colorLabel[i].innerHTML] = hexToRgb(colorPickers[i].value);
@@ -104,7 +104,7 @@ function showColors(colorData, parent) {
 
 	for (const key in colorData) {
 		const colorValues = colorData[key].levels;
-		const colorLabel = createP(key).parent(parent);
+		const colorLabel = createP(key).parent(parent).class("colorLabel");
 		const colorPicker = createColorPicker(color(colorValues[0], colorValues[1], colorValues[2])).parent(parent);
 		colorLabels.push(colorLabel);
 		colorPickers.push({ key, colorPicker });
