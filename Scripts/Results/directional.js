@@ -2,11 +2,11 @@ class DIRECTIONAL {
 	static respond({ result, direction }) {
 		const classifier = game.getClassifierByName("Direction");
 		game.gameState.prediction = result.label;
-		game.player.Move(direction, () =>
+		game.player.Move(direction, () => {
 			classifier.classify(game.getFlippedVideo()).then((result) => {
 				resultsHandler.handle(result);
-			})
-		);
+			});
+		});
 	}
 }
 

@@ -10,6 +10,9 @@ function preload() {
 			webcamVid.play();
 		});
 	}
+	// document.addEventListener("click", () => {
+
+	// });
 
 	config = new configuration();
 

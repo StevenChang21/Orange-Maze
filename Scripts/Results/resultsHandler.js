@@ -11,7 +11,7 @@ class resultsHandler {
 			console.log(`Respond aborted as current game state is not in play state!!!`);
 			return;
 		}
-		// console.log(results);
+		// console.log(prediction);
 		resultsObject.respond(prediction);
 	}
 }

@@ -3,6 +3,7 @@ class gameSystem {
 		this.maze = maze;
 		this.player = player;
 		this.gameState = new InitialState(this);
+		this.canvas = document.querySelector("#snap");
 	}
 
 	getAsset(type) {
@@ -28,7 +29,10 @@ class gameSystem {
 	}
 
 	getFlippedVideo() {
-		const flippedVid = ml5.flipImage(webcamVid);
-		return flippedVid;
+		const ctx = this.canvas.getContext("2d");
+		this.canvas.width = webcamVid.videoWidth;
+		this.canvas.height = webcamVid.videoHeight;
+		ctx.drawImage(webcamVid, 0, 0, webcamVid.videoWidth, webcamVid.videoHeight);
+		return ctx;
 	}
 }

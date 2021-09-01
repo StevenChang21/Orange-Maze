@@ -61,7 +61,7 @@ class PlayState extends GameState {
 	}
 
 	execute() {
-		image(this.gameSystem.getFlippedVideo(), width - 700, 200);
+		// image(this.gameSystem.getFlippedVideo(), width - 700, 200);
 
 		this.gameSystem.maze.Render(this.gameColour.mazeWall, this.gameColour.maze);
 		this.gameSystem.player.Render(this.gameColour.player);

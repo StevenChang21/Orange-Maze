@@ -2,7 +2,7 @@ class VERTICAL {
 	static respond() {
 		const classifier = game.getClassifierByName("Vertical");
 		classifier
-			.classify(game.getAsset("Video"))
+			.classify(game.getFlippedVideo())
 			.then((results) => {
 				resultsHandler.handle(results);
 			})

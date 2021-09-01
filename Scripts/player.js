@@ -43,6 +43,7 @@ class Player {
 
 	Move(direction, onReachDestination) {
 		if (this.blockByWall(direction) || this.isMoving) {
+			onReachDestination();
 			return;
 		}
 		this.isMoving = true;
