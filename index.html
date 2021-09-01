@@ -90,7 +90,10 @@
 		<div id="outer-container">
 			<h2 style="text-decoration: underline">Game</h2>
 			<div class="container-item">
-				<div id="canvas-container"></div>
+				<div id="webcamCanvas-container" style="display: flex">
+					<div id="canvas-container"></div>
+					<video id="webcam" style="width: 30%"></video>
+				</div>
 				<div id="editor-container">
 					<button class="editor-button show-onReady" id="customise-color-button">Customise game color</button>
 					<button class="close-button" style="display: none" id="customise-color-close">X</button>

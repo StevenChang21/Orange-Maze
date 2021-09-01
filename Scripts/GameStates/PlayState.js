@@ -69,7 +69,7 @@ class PlayState extends GameState {
 
 		if (!this.prediction) return;
 		fill(50);
-		text(this.prediction, width - 400, 150);
+		text(this.prediction, (width * 3) / 4, 150);
 	}
 
 	checkHasWon() {

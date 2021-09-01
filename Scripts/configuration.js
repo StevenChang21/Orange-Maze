@@ -2,6 +2,10 @@ class configuration {
 	assetCount = 0;
 	readyAssetCount = 0;
 
+	get loadedAssets() {
+		return this.assetCount === this.readyAssetCount;
+	}
+
 	constructor() {
 		this.assets = new assets("General");
 		this.onAllAssetReadyEvent = new Event("OnAllAssetsReady");

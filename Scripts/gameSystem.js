@@ -28,8 +28,7 @@ class gameSystem {
 	}
 
 	getFlippedVideo() {
-		const vid = this.assets.getChildAssetByType("Video").data;
-		const flippedVid = ml5.flipImage(vid);
+		const flippedVid = ml5.flipImage(webcamVid);
 		return flippedVid;
 	}
 }

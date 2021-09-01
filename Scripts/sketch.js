@@ -1,14 +1,15 @@
 let game, config;
 let debug = false;
+let webcamVid;
 
 function preload() {
-	document.addEventListener("OnAllAssetsReady", () => {
-		game.gameState.gameStatus = "Ready to start game !!!";
-		game.gameState.instructionText = "Ready? Open your hand palm \n to start the game !!!";
-		game.ready = true;
-		game.assets = config.getResourceAssets();
-		runEditor();
-	});
+	webcamVid = document.querySelector("#webcam");
+	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+		navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+			webcamVid.srcObject = stream;
+			webcamVid.play();
+		});
+	}
 
 	config = new configuration();
 
@@ -53,13 +54,13 @@ function preload() {
 	);
 
 	//Setup webcam video
-	config.loadAssets("Video", { video: VIDEO }, (source) => {
-		const video = createCapture(source.video, () => {
-			config.onAssetReady();
-		}).hide();
-		video.size(640, 360);
-		return video;
-	});
+	// config.loadAssets("Video", { video: VIDEO }, (source) => {
+	// 	const video = createCapture(source.video, () => {
+	// 		config.onAssetReady();
+	// 	}).hide();
+	// 	video.size(640, 360);
+	// 	return video;
+	// });
 
 	config.loadAssets("Difficulty", {
 		difficultyOffset: 2,
@@ -92,6 +93,17 @@ function setup() {
 	createCanvas(900, 700).parent("canvas-container");
 	const maze = new Maze(50, 580, 460);
 	game = new gameSystem(maze, new Player());
+
+	function onLoadedAssets() {
+		game.gameState.gameStatus = "Ready to start game !!!";
+		game.gameState.instructionText = "Ready? Open your hand palm \n to start the game !!!";
+		game.ready = true;
+		game.assets = config.getResourceAssets();
+		runEditor();
+	}
+
+	if (config.loadAssets) onLoadedAssets();
+	else document.addEventListener("OnAllAssetsReady", onLoadedAssets);
 }
 
 function draw() {
