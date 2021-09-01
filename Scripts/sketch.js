@@ -1,20 +1,21 @@
 let game, config;
 let debug = false;
-let webcamVid;
 
 function preload() {
-	webcamVid = document.querySelector("#webcam");
+	config = new configuration();
+
+	const webcamVid = document.querySelector("#webcam");
 	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-		navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-			webcamVid.srcObject = stream;
-			webcamVid.play();
+		//Video
+		config.loadAssets("Video", webcamVid, (source) => {
+			navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+				webcamVid.srcObject = stream;
+				webcamVid.play();
+				config.onAssetReady();
+			});
+			return source;
 		});
 	}
-	// document.addEventListener("click", () => {
-
-	// });
-
-	config = new configuration();
 
 	//Models
 	config.loadAssets(
@@ -55,15 +56,6 @@ function preload() {
 			return models;
 		}
 	);
-
-	//Setup webcam video
-	// config.loadAssets("Video", { video: VIDEO }, (source) => {
-	// 	const video = createCapture(source.video, () => {
-	// 		config.onAssetReady();
-	// 	}).hide();
-	// 	video.size(640, 360);
-	// 	return video;
-	// });
 
 	config.loadAssets("Difficulty", {
 		difficultyOffset: 2,

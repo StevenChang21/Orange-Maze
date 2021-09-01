@@ -4,6 +4,7 @@ class gameSystem {
 		this.player = player;
 		this.gameState = new InitialState(this);
 		this.canvas = document.querySelector("#snap");
+		this.ctx = this.canvas.getContext("2d");
 	}
 
 	getAsset(type) {
@@ -29,10 +30,10 @@ class gameSystem {
 	}
 
 	getFlippedVideo() {
-		const ctx = this.canvas.getContext("2d");
-		this.canvas.width = webcamVid.videoWidth;
-		this.canvas.height = webcamVid.videoHeight;
-		ctx.drawImage(webcamVid, 0, 0, webcamVid.videoWidth, webcamVid.videoHeight);
-		return ctx;
+		const vid = this.getAsset("Video");
+		this.canvas.width = vid.videoWidth;
+		this.canvas.height = vid.videoHeight;
+		this.ctx.drawImage(vid, 0, 0, vid.videoWidth, vid.videoHeight);
+		return this.ctx;
 	}
 }

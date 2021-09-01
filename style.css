@@ -60,3 +60,9 @@ button {
 	align-items: center;
 	border: dotted 0.25rem;
 }
+
+#webcam {
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
+	-moz-transform: rotateY(180deg); /* Firefox */
+}
