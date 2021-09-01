@@ -12,20 +12,6 @@ function preload() {
 
 	config = new configuration();
 
-	//Images
-	config.loadAssets(
-		"Image",
-		{ Up: "./Images/Up.jpeg", Down: "./Images/Down.jpeg", Open: "./Images/Open.jpg", Left: "./Images/Left.jpeg", Right: "./Images/Right.jpeg" },
-		(source) => {
-			let images = {};
-			for (const key in source) {
-				const image = loadImage(source[key], () => config.onAssetReady());
-				images[key] = image;
-			}
-			return images;
-		}
-	);
-
 	//Models
 	config.loadAssets(
 		"Model",

@@ -13,16 +13,6 @@ class PlayState extends GameState {
 		// Destination set next to player this.destination = this.gameSystem.maze.GetCellByCoordinate(this.gameSystem.maze.rows_number / 2 + 1, this.gameSystem.maze.columns_number / 2);
 		this.destination = this.gameSystem.maze.all_cells[this.gameSystem.maze.all_cells.length - 1];
 
-		const imageAssets = this.gameSystem.getAsset("Image");
-
-		this.referenceImage = {
-			Up: imageAssets.Up,
-			Down: imageAssets.Down,
-			Open: imageAssets.Open,
-			Left: imageAssets.Left,
-			Right: imageAssets.Right,
-		};
-
 		const colorAssets = this.gameSystem.getAsset("Color");
 
 		this.gameColour = {
@@ -32,7 +22,6 @@ class PlayState extends GameState {
 			target: colorAssets.target,
 		};
 
-		resizeCanvas(1500, 700);
 		this.gameSystem
 			.getClassifierByName("Direction")
 			.classify(this.gameSystem.getFlippedVideo())
@@ -72,8 +61,6 @@ class PlayState extends GameState {
 	}
 
 	execute() {
-		this.displayPicture();
-		tutorial();
 		image(this.gameSystem.getFlippedVideo(), width - 700, 200);
 
 		this.gameSystem.maze.Render(this.gameColour.mazeWall, this.gameColour.maze);
@@ -83,14 +70,6 @@ class PlayState extends GameState {
 		if (!this.prediction) return;
 		fill(50);
 		text(this.prediction, width - 400, 150);
-	}
-
-	displayPicture() {
-		image(this.referenceImage.Up, 580, 10, 175, 175);
-		image(this.referenceImage.Down, 580, 235, 175, 175);
-		image(this.referenceImage.Open, 580, 460, 175, 175);
-		image(this.referenceImage.Left, 310, 460, 175, 175);
-		image(this.referenceImage.Right, 40, 460, 175, 175);
 	}
 
 	checkHasWon() {
