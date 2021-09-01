@@ -48,7 +48,7 @@
 		<div id="tutorial-container">
 			<div class="tutorial-item-container">
 				<img class="reference-img" src="./Images/Up.jpeg" alt="" />
-				<p>
+				<p class="reference-txt">
 					Up Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium soluta
 					aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam corporis
 					autem unde sed placeat minima est, ut consectetur repudiandae ratione.
@@ -56,7 +56,7 @@
 			</div>
 			<div class="tutorial-item-container">
 				<img class="reference-img" src="./Images/Down.jpeg" alt="" />
-				<p>
+				<p class="reference-txt">
 					Down Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium soluta
 					aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam corporis
 					autem unde sed placeat minima est, ut consectetur repudiandae ratione.
@@ -64,7 +64,7 @@
 			</div>
 			<div class="tutorial-item-container">
 				<img class="reference-img" src="./Images/Left.jpeg" alt="" />
-				<p>
+				<p class="reference-txt">
 					Left Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium soluta
 					aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam corporis
 					autem unde sed placeat minima est, ut consectetur repudiandae ratione.
@@ -72,7 +72,7 @@
 			</div>
 			<div class="tutorial-item-container">
 				<img class="reference-img" src="./Images/Right.jpeg" alt="" />
-				<p>
+				<p class="reference-txt">
 					Right Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium
 					soluta aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam
 					corporis autem unde sed placeat minima est, ut consectetur repudiandae ratione.
@@ -80,7 +80,7 @@
 			</div>
 			<div class="tutorial-item-container">
 				<img class="reference-img" src="./Images/Open.jpg" alt="" />
-				<p>
+				<p class="reference-txt">
 					Open Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium soluta
 					aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam corporis
 					autem unde sed placeat minima est, ut consectetur repudiandae ratione.
@@ -88,10 +88,12 @@
 			</div>
 		</div>
 		<div id="outer-container">
-			<h2 style="text-decoration: underline">Game</h2>
 			<div class="container-item">
-				<div id="webcamCanvas-container" style="display: flex">
-					<div id="canvas-container"></div>
+				<div id="webcamCanvas-container">
+					<div id="game-container">
+						<h2 id="game-header">Game</h2>
+						<div id="canvas-container"></div>
+					</div>
 					<video id="webcam" style="width: 30%"></video>
 				</div>
 				<div id="editor-container">

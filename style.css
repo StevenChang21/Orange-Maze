@@ -1,6 +1,7 @@
 html {
 	font-family: monospace;
 	font-size: large;
+	text-align: center;
 }
 
 #outer-container {
@@ -65,4 +66,17 @@ button {
 	transform: rotateY(180deg);
 	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
 	-moz-transform: rotateY(180deg); /* Firefox */
+}
+
+#webcamCanvas-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+#game-header {
+	text-decoration: underline;
+}
+
+.reference-txt {
+	text-align: left;
 }
