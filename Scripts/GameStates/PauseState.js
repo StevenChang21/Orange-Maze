@@ -11,9 +11,9 @@ class PauseState extends GameState {
 	}
 
 	execute() {
-		textSize(50)
-		text("Press ENTER to continue the game", 750 , height / 2);
-		fill(50)
+		textSize(50);
+		text("Press ENTER to continue the game", width / 2, height / 2);
+		fill(50);
 		if (keyIsDown(ENTER)) {
 			console.log("Continue");
 			if (this.previousState) {
