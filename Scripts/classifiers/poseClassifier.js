@@ -38,14 +38,7 @@ class poseClassifier extends classifier {
 			flipHorizontal: true,
 		};
 		this.neuralNetwork = ml5.neuralNetwork(nnOptions);
-		this.poseNet = await ml5.poseNet(undefined, posenetOptions);
+		this.poseNet = ml5.poseNet(posenetOptions);
 		return this.neuralNetwork.load(modelInfo).catch((err) => console.log(err));
-	}
-
-	gotPoses(poses) {
-		if (poses.length > 0) {
-			this.pose = poses[0].pose;
-			this.skeleton = poses[0].skeleton;
-		}
 	}
 }

@@ -48,3 +48,15 @@ button {
 	align-items: center;
 	column-gap: 0.5rem;
 }
+
+.reference-img {
+	width: 10%;
+	padding: 0.5rem;
+}
+
+.tutorial-item-container {
+	margin: 0.5rem;
+	display: flex;
+	align-items: center;
+	border: dotted 0.25rem;
+}
