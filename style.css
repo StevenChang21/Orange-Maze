@@ -66,11 +66,15 @@ button {
 	transform: rotateY(180deg);
 	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
 	-moz-transform: rotateY(180deg); /* Firefox */
+	border-radius: 10%;
+	height: 20%;
+	border: solid sandybrown 0.5rem;
 }
 
-#webcamCanvas-container {
+#game-outer-container {
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
 }
 
 #game-header {

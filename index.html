@@ -89,12 +89,16 @@
 		</div>
 		<div id="outer-container">
 			<div class="container-item">
-				<div id="webcamCanvas-container">
+				<div id="game-outer-container">
 					<div id="game-container">
 						<h2 id="game-header">Game</h2>
 						<div id="canvas-container"></div>
 					</div>
-					<video id="webcam" style="width: 30%"></video>
+					<div id="video-label-container">
+						<video id="webcam" style="width: 80%"></video>
+						<h3 id="result-label" style="display: none">Classifying gesture ...</h3>
+						<h3 id="probability-label" style="display: none">... %</h3>
+					</div>
 				</div>
 				<div id="editor-container">
 					<button class="editor-button show-onReady" id="customise-color-button">Customise game color</button>

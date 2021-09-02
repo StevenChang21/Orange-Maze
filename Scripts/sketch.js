@@ -1,8 +1,11 @@
-let game, config;
+let game, config, resultLabel, probabilityLabel;
 let debug = false;
 
 function preload() {
 	config = new configuration();
+
+	resultLabel = document.querySelector("#result-label");
+	probabilityLabel = document.querySelector("#probability-label");
 
 	const webcamVid = document.querySelector("#webcam");
 	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -22,9 +25,11 @@ function preload() {
 		"Model",
 		{
 			Direction: {
-				source: "https://teachablemachine.withgoogle.com/models/WXBWVjQDX/", //"https://teachablemachine.withgoogle.com/models/nNtbYUnn-/",
+				//version 1: "https://teachablemachine.withgoogle.com/models/7WRHgCGqz/"
+				//version 2: "https://teachablemachine.withgoogle.com/models/WXBWVjQDX/"
+				source: "https://teachablemachine.withgoogle.com/models/ORW4hdSSa/",
 				instanceName: "imageClassifier",
-			}, //"https://teachablemachine.withgoogle.com/models/7WRHgCGqz/",
+			},
 			Vertical: {
 				source: {
 					model: "../Models/model.json",
@@ -34,7 +39,8 @@ function preload() {
 				instanceName: "poseClassifier",
 			}, //"https://teachablemachine.withgoogle.com/models/gvwdkEKSF/",
 			Horizontal: {
-				source: "https://teachablemachine.withgoogle.com/models/9r5lWuqRi/",
+				//version 1: "https://teachablemachine.withgoogle.com/models/9r5lWuqRi/"
+				source: "https://teachablemachine.withgoogle.com/models/tynvznpSm/",
 				instanceName: "imageClassifier",
 			},
 		},

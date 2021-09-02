@@ -1,7 +1,11 @@
 class DIRECTIONAL {
 	static respond({ result, direction }) {
 		const classifier = game.getClassifierByName("Direction");
-		game.gameState.prediction = result.label;
+		if (typeof result.probability === "string") {
+			result.probability = parseFloat(result.probability);
+		}
+		probabilityLabel.innerHTML = `${result.probability.toFixed(2) * 100} %`;
+		resultLabel.innerHTML = result.label;
 		game.player.Move(direction, () => {
 			classifier.classify(game.getFlippedVideo()).then((result) => {
 				resultsHandler.handle(result);

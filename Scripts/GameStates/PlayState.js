@@ -28,6 +28,9 @@ class PlayState extends GameState {
 			.then((prediction) => {
 				resultsHandler.handle(prediction);
 			});
+
+		resultLabel.style.display = "block";
+		probabilityLabel.style.display = "block";
 	}
 
 	listenToVisibilityChangedChannel() {
@@ -66,10 +69,6 @@ class PlayState extends GameState {
 		this.gameSystem.maze.Render(this.gameColour.mazeWall, this.gameColour.maze);
 		this.gameSystem.player.Render(this.gameColour.player);
 		this.checkHasWon();
-
-		if (!this.prediction) return;
-		fill(50);
-		text(this.prediction, (width * 3) / 4, 150);
 	}
 
 	checkHasWon() {
