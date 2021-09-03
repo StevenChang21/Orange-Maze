@@ -19,7 +19,6 @@ function preload() {
 			return source;
 		});
 	}
-
 	//Models
 	config.loadAssets(
 		"Model",
@@ -48,15 +47,21 @@ function preload() {
 			let models = {};
 			for (const key in source) {
 				const $classifier = eval(`new ${source[key].instanceName}(key)`);
-				$classifier
-					.load(source[key].source)
-					.then((loadedModel) => {
-						if (loadedModel) {
+
+				loadModel();
+
+				function loadModel() {
+					$classifier
+						.load(source[key].source)
+						.then((loadedModel) => {
 							$classifier.model = loadedModel;
-						}
-						config.onAssetReady();
-					})
-					.catch((err) => console.log(err));
+							config.onAssetReady();
+						})
+						.catch((err) => {
+							console.log(err);
+							setTimeout(() => location.reload(), 5000);
+						});
+				}
 				models[key] = $classifier;
 			}
 			return models;
@@ -103,7 +108,7 @@ function setup() {
 		runEditor();
 	}
 
-	if (config.loadAssets) onLoadedAssets();
+	if (config.loadedAssets) onLoadedAssets();
 	else document.addEventListener("OnAllAssetsReady", onLoadedAssets);
 }
 
