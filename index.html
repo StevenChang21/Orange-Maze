@@ -39,52 +39,53 @@
 
 		<script src="./Scripts/editor.js"></script>
 		<script src="./Scripts/sketch.js"></script>
+		<!-- Coolors Palette Widget -->
+		<script src="https://coolors.co/palette-widget/widget.js"></script>
+		<script data-id="06780250368156207">
+			new CoolorsPaletteWidget("06780250368156207", ["8ecae6", "219ebc", "126782", "023047", "ffb703", "fd9e02", "fb8500"]);
+		</script>
 	</head>
 
 	<body>
 		<header id="main-header">
+			<img src="./Images/maze-logo.png" alt="A maze logo" />
 			<h1>The maze walker</h1>
 		</header>
 		<div id="tutorial-container">
-			<div class="tutorial-item-container">
-				<img class="reference-img" src="./Images/Up.jpeg" alt="" />
-				<p class="reference-txt">
-					Up Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium soluta
-					aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam corporis
-					autem unde sed placeat minima est, ut consectetur repudiandae ratione.
-				</p>
+			<div id="image-tutorial-container">
+				<h2 id="tutorial-header">How to play?</h2>
+				<div class="tutorial-item-container">
+					<img class="reference-img" src="./Images/Up.jpeg" alt="" />
+					<p class="tutorial-label">Up</p>
+				</div>
+				<div class="tutorial-item-container">
+					<img class="reference-img" src="./Images/Down.jpeg" alt="" />
+					<p class="tutorial-label">Down</p>
+				</div>
+				<div class="tutorial-item-container">
+					<img class="reference-img" src="./Images/Left.jpeg" alt="" />
+					<p class="tutorial-label">Left</p>
+				</div>
+				<div class="tutorial-item-container">
+					<img class="reference-img" src="./Images/Right.jpeg" alt="" />
+					<p class="tutorial-label">Right</p>
+				</div>
+				<div class="tutorial-item-container">
+					<img class="reference-img" src="./Images/Open.jpg" alt="" />
+					<p class="tutorial-label">Open</p>
+				</div>
 			</div>
-			<div class="tutorial-item-container">
-				<img class="reference-img" src="./Images/Down.jpeg" alt="" />
-				<p class="reference-txt">
-					Down Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium soluta
-					aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam corporis
-					autem unde sed placeat minima est, ut consectetur repudiandae ratione.
-				</p>
-			</div>
-			<div class="tutorial-item-container">
-				<img class="reference-img" src="./Images/Left.jpeg" alt="" />
-				<p class="reference-txt">
-					Left Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium soluta
-					aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam corporis
-					autem unde sed placeat minima est, ut consectetur repudiandae ratione.
-				</p>
-			</div>
-			<div class="tutorial-item-container">
-				<img class="reference-img" src="./Images/Right.jpeg" alt="" />
-				<p class="reference-txt">
-					Right Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium
-					soluta aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam
-					corporis autem unde sed placeat minima est, ut consectetur repudiandae ratione.
-				</p>
-			</div>
-			<div class="tutorial-item-container">
-				<img class="reference-img" src="./Images/Open.jpg" alt="" />
-				<p class="reference-txt">
-					Open Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nulla ullam, molestiae modi ipsam corporis officiis accusantium soluta
-					aut nemo maxime animi nihil eligendi eos omnis quis unde qui hic similique culpa facere, eius quasi excepturi rem. Magnam aliquam corporis
-					autem unde sed placeat minima est, ut consectetur repudiandae ratione.
-				</p>
+			<div id="outer-description-container" class="description-container">
+				<div id="inner-description-container" class="description-container">
+					<blockquote>
+						<p id="tutorial-description">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum laboriosam ipsa, eligendi reprehenderit nesciunt eum expedita obcaecati
+							perspiciatis rerum odio nostrum. Nobis minus vel, animi sunt tempore exercitationem, iure id repellat ea fuga, eveniet consequuntur
+							laborum dicta praesentium suscipit maiores quidem totam corporis consectetur laudantium soluta amet culpa! Aliquam cum omnis cumque
+							blanditiis
+						</p>
+					</blockquote>
+				</div>
 			</div>
 		</div>
 		<div id="outer-container">
