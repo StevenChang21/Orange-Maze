@@ -1,6 +1,6 @@
 class InitialState extends GameState {
 	GameName = "Welcome to Orange Maze !";
-	instructionText = "Ready ? \n Open your hand to start the game ";
+	instructionText = "Ready ? \n Press ENTER to start the game ";
 	constructor(gameSystem) {
 		super(gameSystem);
 		this.start();
