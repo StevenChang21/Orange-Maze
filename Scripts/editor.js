@@ -20,6 +20,20 @@ function runEditor() {
 	const editorContainer = document.querySelector("#editor-container");
 	const colorCustomisationContainer = document.querySelector("#color-customisation-container");
 
+	const collapsibles = document.querySelectorAll(".collapsible");
+	const expandButton = document.querySelector("#color-editor-button");
+	for (let i = 0; i < collapsibles.length; i++) {
+		collapsibles[i].addEventListener("click", () => {
+			expandButton.classList.toggle("active");
+			const content = expandButton.nextElementSibling;
+			if (content.style.display === "flex") {
+				content.style.display = "none";
+			} else {
+				content.style.display = "flex";
+			}
+		});
+	}
+
 	setColorsButton.addEventListener("click", () => {
 		editorContainer.children.forEach((child) => {
 			child.style.display = "none";

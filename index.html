@@ -95,15 +95,15 @@
 					<h3 id="probability-label" class="result-label">... %</h3>
 				</div>
 			</div>
-			<h2 id="color-editor-title">Game Color Editor</h2>
+			<button id="color-editor-button" class="collapsible expandible-horizontal">Color Editor</button>
 			<div id="editor-container">
-				<button class="editor-button show-onReady" id="customise-color-button">Customise color</button>
-				<button class="close-button" style="display: none" id="customise-color-close">X</button>
+				<button class="editor-button show-onReady expandible" id="customise-color-button">Customise color</button>
+				<button class="close-button expandible" style="display: none" id="customise-color-close">X</button>
 				<div id="color-customisation-container" style="display: none"></div>
-				<button class="editor-button show-onReady" id="use-save-color-button">Apply saved color</button>
-				<button class="close-button" style="display: none" id="use-save-color-close">X</button>
+				<button class="editor-button show-onReady expandible" id="use-save-color-button">Apply saved color</button>
+				<button class="close-button expandible" style="display: none" id="use-save-color-close">X</button>
 				<input type="file" name="color" id="color-file-input" style="display: none" accept="application/json" />
-				<button class="editor-button" id="save-color-button">Save color</button>
+				<button class="editor-button expandible" id="save-color-button">Save color</button>
 			</div>
 			<canvas id="snap" style="display: none"></canvas>
 		</div>
