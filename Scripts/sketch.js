@@ -97,7 +97,7 @@ function preload() {
 
 function setup() {
 	createCanvas(900, 700).parent("canvas-container");
-	const maze = new Maze(50, 580, 460);
+	const maze = new Maze(50, width, height);
 	game = new gameSystem(maze, new Player());
 
 	function onLoadedAssets() {
