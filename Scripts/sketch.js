@@ -102,7 +102,7 @@ function setup() {
 
 	function onLoadedAssets() {
 		game.gameState.gameStatus = "Ready to start game !!!";
-		game.gameState.instructionText = "Ready? Open your hand palm \n to start the game !!!";
+		game.gameState.instructionText = "Ready? Press ENTER \n to start the game !!!";
 		game.ready = true;
 		game.assets = config.getResourceAssets();
 		runEditor();
