@@ -105,19 +105,51 @@ blockquote:before {
 }
 
 #outer-container {
+	background: #219ebc;
+}
+
+#game-title-container {
+	background: #023047;
+	border-radius: 0 0 1rem 1rem;
+	width: 20%;
+	height: 8rem;
+	margin: auto;
+}
+
+#game-header {
+	color: #fff;
+	text-align: center;
+	padding-top: 1rem;
+}
+
+#game-container {
+	margin: 2rem 0;
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
 
-#defaultCanvas0 {
-	margin: 20px;
+#video-label-container {
+	margin-left: 3rem;
+	text-align: center;
+	background: #ffb703;
+	border-radius: 10%;
 }
 
-#canvas-container {
-	background: url("./Images/orange.gif");
-	background-repeat: round;
-	background-size: 40px;
+#webcam {
+	/* transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg); */
+	border-radius: 10%;
+	width: 20rem;
+	aspect-ratio: 1;
+	background: #fb8500;
+	margin: 1.5rem;
+}
+
+.result-label {
+	color: #023047;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
@@ -142,27 +174,4 @@ button {
 	justify-items: end;
 	align-items: center;
 	column-gap: 0.5rem;
-}
-
-#webcam {
-	transform: rotateY(180deg);
-	-webkit-transform: rotateY(180deg); /* Safari and Chrome */
-	-moz-transform: rotateY(180deg); /* Firefox */
-	border-radius: 10%;
-	height: 20%;
-	border: solid sandybrown 0.5rem;
-}
-
-#game-outer-container {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-
-#game-header {
-	text-decoration: underline;
-}
-
-.reference-txt {
-	text-align: left;
 }
