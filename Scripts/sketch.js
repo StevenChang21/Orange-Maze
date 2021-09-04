@@ -78,7 +78,7 @@ function preload() {
 	config.loadAssets(
 		"Color",
 		{
-			background: color("#FFB740"),
+			background: color("#fd9e02"),
 			maze: color("#DF711B"),
 			mazeWall: color(255, 213, 126),
 			player: color("#64C9CF"),

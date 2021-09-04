@@ -26,7 +26,6 @@ function runEditor() {
 		});
 		saveColorsButton.style.display = "inline";
 		closeSetColorsButton.style.display = "inline";
-		editorContainer.style.justifyContent = "space-between";
 		colorCustomisationContainer.style.display = "grid";
 		const colorAssets = config.assets.getChildAssetByType("Color").data;
 		showColors(colorAssets, colorCustomisationContainer);
@@ -75,7 +74,6 @@ function runEditor() {
 		});
 		colorFileInput.style.display = "inline";
 		closeUseSavedColorButton.style.display = "inline";
-		editorContainer.style.justifyContent = "space-between";
 	});
 
 	closeUseSavedColorButton.addEventListener("click", (e) => {
