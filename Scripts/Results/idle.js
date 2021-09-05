@@ -4,6 +4,8 @@ class IDLE {
 		resultLabel.innerHTML = info.label;
 		probabilityLabel.innerHTML = `${info.probability.toFixed(2) * 100} %`;
 		const classifier = game.getClassifierByName("Direction");
-		classifier.classify(game.getFlippedVideo()).then((results) => resultsHandler.handle(results));
+		setTimeout(() => {
+			classifier.classify(game.getFlippedVideo()).then((results) => resultsHandler.handle(results));
+		}, 500);
 	}
 }
