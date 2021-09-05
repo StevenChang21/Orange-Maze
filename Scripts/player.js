@@ -42,7 +42,8 @@ class Player {
 	}
 
 	Move(direction, onReachDestination) {
-		if (this.blockByWall(direction) || this.isMoving) {
+		if (this.isMoving) return;
+		if (this.blockByWall(direction)) {
 			onReachDestination();
 			return;
 		}
