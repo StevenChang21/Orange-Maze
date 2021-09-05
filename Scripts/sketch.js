@@ -83,7 +83,7 @@ function preload() {
 			mazeWall: color(255, 213, 126),
 			player: color("#64C9CF"),
 			target: color(255),
-			text: color("#fff"),
+			text: color("#023047"),
 			button: color(100),
 		},
 		(source) => {

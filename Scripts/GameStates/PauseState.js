@@ -6,14 +6,12 @@ class PauseState extends GameState {
 
 	start() {
 		window.alert("Game is paused !!!");
-
-		// let clone = Object.assign(Object.create(Object.getPrototypeOf(this.gameSystem)), this.gameSystem);
+		fill(this.gameSystem.getAsset("Color")["text"]);
 	}
 
 	execute() {
 		textSize(50);
 		text("Press ENTER to continue the game", width / 2, height / 2);
-		fill(50);
 		if (keyIsDown(ENTER)) {
 			console.log("Continue");
 			if (this.previousState) {

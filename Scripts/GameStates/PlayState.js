@@ -9,8 +9,7 @@ class PlayState extends GameState {
 	start() {
 		this.listenToVisibilityChangedChannel();
 		this.gameSystem.maze.Generate();
-		this.gameSystem.player.Spawn(this.gameSystem.maze, { x: 0, y: 0 });
-		// Destination set next to player this.destination = this.gameSystem.maze.GetCellByCoordinate(this.gameSystem.maze.rows_number / 2 + 1, this.gameSystem.maze.columns_number / 2);
+		this.gameSystem.player.Spawn(this.gameSystem.maze);
 		this.destination = this.gameSystem.maze.all_cells[this.gameSystem.maze.all_cells.length - 1];
 
 		const colorAssets = this.gameSystem.getAsset("Color");
@@ -64,8 +63,10 @@ class PlayState extends GameState {
 	}
 
 	execute() {
-		// image(this.gameSystem.getFlippedVideo(), width - 700, 200);
-
+		if (game.gameState instanceof PlayState && key == "p") {
+			game.gameState.pause(game.gameState);
+			return;
+		}
 		this.gameSystem.maze.Render(this.gameColour.mazeWall, this.gameColour.maze);
 		this.gameSystem.player.Render(this.gameColour.player);
 		this.checkHasWon();
@@ -74,15 +75,10 @@ class PlayState extends GameState {
 	checkHasWon() {
 		this.destination.Show(this.gameColour.mazeWall, this.gameColour.target);
 		if (this.gameSystem.player.cell_in === this.destination) {
+			// || key == "w") {
 			document.removeEventListener("visibilitychange", this.onVisibilityChange);
 			this.gameSystem.maze.clearCache();
 			this.gameSystem.changeState(WonState);
 		}
-	}
-}
-
-function keyPressed() {
-	if (game.gameState instanceof PlayState && key == "p") {
-		game.gameState.pause(game.gameState);
 	}
 }
