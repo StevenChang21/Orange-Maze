@@ -14,8 +14,8 @@ class DIRECTIONAL {
 			repeatClassification();
 			return;
 		}
-		probabilityLabel.innerHTML = `${resultProbability} %`;
-		resultLabel.innerHTML = result.label;
+		game.gameState.resultLabels.probability.innerHTML = `${resultProbability} %`;
+		game.gameState.resultLabels.class.innerHTML = result.label;
 		game.player.Move(direction, repeatClassification);
 	}
 }
