@@ -83,7 +83,7 @@ function preload() {
 			mazeWall: color(255, 213, 126),
 			player: color("#64C9CF"),
 			target: color(255),
-			text: color(200),
+			text: color("#fff"),
 			button: color(100),
 		},
 		(source) => {
@@ -101,10 +101,9 @@ function setup() {
 	game = new gameSystem(maze, new Player());
 
 	function onLoadedAssets() {
-		game.gameState.gameStatus = "Ready to start game !!!";
-		game.gameState.instructionText = "Ready? Press ENTER \n to start the game !!!";
-		game.ready = true;
 		game.assets = config.getResourceAssets();
+		game.ready = true;
+		game.gameState.initiate();
 		runEditor();
 	}
 
