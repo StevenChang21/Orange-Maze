@@ -1,0 +1,41 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: gray;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+	font-size: x-large;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	margin: 20px;
+	color: aliceblue;
+}
+
+#timer {
+	color: beige;
+	margin: 1rem;
+	text-align: center;
+}
+
+.outer-container {
+	padding: 0 1rem;
+	background: darkgray;
+	margin: 10px;
+}
+
+#canvas-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+.sample {
+	aspect-ratio: 1;
+	width: 200px;
+}
