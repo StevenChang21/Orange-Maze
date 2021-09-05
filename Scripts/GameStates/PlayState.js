@@ -28,8 +28,14 @@ class PlayState extends GameState {
 				resultsHandler.handle(prediction);
 			});
 
-		resultLabel.style.display = "block";
-		probabilityLabel.style.display = "block";
+		this.resultLabels = {
+			class: document.querySelector("#result-label"),
+			probability: document.querySelector("#probability-label"),
+		};
+
+		for (const key in this.resultLabels) {
+			this.resultLabels[key].style.display = "block";
+		}
 	}
 
 	listenToVisibilityChangedChannel() {
@@ -54,12 +60,17 @@ class PlayState extends GameState {
 			.then((prediction) => {
 				resultsHandler.handle(prediction);
 			});
+		for (const key in this.resultLabels) {
+			this.resultLabels[key].style.display = "block";
+		}
 	}
 
 	pause(source) {
-		console.log("Pausing...");
 		source.gameSystem.changeState(PauseState);
 		source.gameSystem.gameState.previousState = this;
+		for (const key in this.resultLabels) {
+			this.resultLabels[key].style.display = "none";
+		}
 	}
 
 	execute() {
@@ -75,9 +86,12 @@ class PlayState extends GameState {
 	checkHasWon() {
 		this.destination.Show(this.gameColour.mazeWall, this.gameColour.target);
 		if (this.gameSystem.player.cell_in === this.destination) {
-			// || key == "w") {
+			//|| key == "w") {
 			document.removeEventListener("visibilitychange", this.onVisibilityChange);
 			this.gameSystem.maze.clearCache();
+			for (const key in this.resultLabels) {
+				this.resultLabels[key].style.display = "none";
+			}
 			this.gameSystem.changeState(WonState);
 		}
 	}

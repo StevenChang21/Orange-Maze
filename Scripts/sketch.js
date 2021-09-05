@@ -1,11 +1,8 @@
-let game, config, resultLabel, probabilityLabel;
+let game, config;
 let debug = false;
 
 function preload() {
 	config = new configuration();
-
-	resultLabel = document.querySelector("#result-label");
-	probabilityLabel = document.querySelector("#probability-label");
 
 	const webcamVid = document.querySelector("#webcam");
 	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
