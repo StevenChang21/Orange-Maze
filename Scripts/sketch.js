@@ -97,12 +97,12 @@ function preload() {
 
 function setup() {
 	createCanvas(900, 700).parent("canvas-container");
-	const maze = new Maze(50, 580, 460);
+	const maze = new Maze(50, width, height);
 	game = new gameSystem(maze, new Player());
 
 	function onLoadedAssets() {
 		game.gameState.gameStatus = "Ready to start game !!!";
-		game.gameState.instructionText = "Ready? Open your hand palm \n to start the game !!!";
+		game.gameState.instructionText = "Ready? Press ENTER \n to start the game !!!";
 		game.ready = true;
 		game.assets = config.getResourceAssets();
 		runEditor();

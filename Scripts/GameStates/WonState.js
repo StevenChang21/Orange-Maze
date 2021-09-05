@@ -23,7 +23,6 @@ class WonState extends GameState {
 		nextLevelButton.position(width - buttonSize.width, height - buttonSize.height);
 
 		nextLevelButton.mousePressed(() => {
-			//if ( label == "Next"){
 			this.modifyDifficulty();
 			this.gameSystem.changeState(PlayState);
 			nextLevelButton.remove();
@@ -40,6 +39,6 @@ class WonState extends GameState {
 	execute() {
 		textSize(50);
 		fill(50);
-		text("CONGRATS \n You have cleared this level !!!\n Open you hand palm to go next level", oscillator.oscillateInCanvas(width, 1, 300, 0), 200);
+		text("CONGRATS \n You have cleared this level !!!\n Press ENTER to go next level", oscillator.oscillateInCanvas(width, 1, 300, 0), 200);
 	}
 }

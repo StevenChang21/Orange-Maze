@@ -4,13 +4,18 @@ class DIRECTIONAL {
 		if (typeof result.probability === "string") {
 			result.probability = parseFloat(result.probability);
 		}
-		probabilityLabel.innerHTML = `${result.probability.toFixed(2) * 100} %`;
-		resultLabel.innerHTML = result.label;
-		game.player.Move(direction, () => {
+		const resultProbability = result.probability.toFixed(2) * 100;
+		function repeatClassification() {
 			classifier.classify(game.getFlippedVideo()).then((result) => {
 				resultsHandler.handle(result);
 			});
-		});
+		}
+		if (resultProbability < 75) {
+			repeatClassification();
+		}
+		probabilityLabel.innerHTML = `${resultProbability} %`;
+		resultLabel.innerHTML = result.label;
+		game.player.Move(direction, repeatClassification);
 	}
 }
 
