@@ -1,15 +1,13 @@
 let video, posenet, myPose, skeleton, currentLabel;
-let neuralNetwork, state, myCanvas;
+let neuralNetwork, myCanvas;
 let leftSampleCount = 0;
 let rightSampleCount = 0;
-let leftSampleCountLabel, rightSampleCountLabel, timer;
-const prepareTime = 3;
-const collectTime = 2;
+let leftSampleCountLabel, rightSampleCountLabel;
 let leftSampleContainer, rightSampleContainer;
-let frame;
+let collectDataInterval;
 
 function keyPressed() {
-	if (state == "collecting") return;
+	if (leftSampleCount <= 0 || rightSampleCount <= 0) return;
 	if (key == "t") {
 		const trainingOptions = {
 			epochs: 32,
@@ -24,38 +22,6 @@ function keyPressed() {
 	}
 	if (key == "s") {
 		neuralNetwork.saveData();
-	} else {
-		if (key == "l") {
-			currentLabel = "Left";
-		} else if (key == "r") {
-			currentLabel = "Right";
-		} else {
-			return;
-		}
-
-		timer.innerHTML = `Prepare your pose, starting to take <u>${currentLabel}</u> samples ...`;
-		timer.style.display = "block";
-
-		let timeLeft = prepareTime;
-		const prepareCountdown = setInterval(() => {
-			timer.innerHTML = `Taking <u>${currentLabel}</u> samples in ${timeLeft}`;
-			timeLeft--;
-			if (timeLeft < 0) {
-				timer.innerHTML = `Started taking <u>${currentLabel}</u> samples`;
-				clearInterval(prepareCountdown);
-				timeLeft = collectTime;
-				state = "collecting";
-				const collectCountdown = setInterval(() => {
-					timer.innerHTML = `Stop taking <u>${currentLabel}</u> samples in ${timeLeft}`;
-					timeLeft--;
-					if (timeLeft < 0) {
-						clearInterval(collectCountdown);
-						state = "idle";
-						timer.style.display = "none";
-					}
-				}, 1000);
-			}
-		}, 1000);
 	}
 }
 
@@ -70,20 +36,30 @@ function setup() {
 	rightSampleCountLabel = document.querySelector("#right-sample-count");
 	leftSampleContainer = document.querySelector("#left-sample-container");
 	rightSampleContainer = document.querySelector("#right-sample-container");
-
-	document.querySelectorAll(".accordion-button").forEach((button) => {
-		button.addEventListener("click", () => {
-			// const accordionContent = button.nextElementSibling;
-			button.classList.toggle("accordion-button--active");
-			// if (button.classList.contains("accordion-button--active")) {
-			// 	accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
-			// } else {
-			// 	accordionContent.style.maxHeight = 0;
-			// }
-		});
+	const leftSampleButton = document.querySelector("#add-left-sample-button");
+	const rightSampleButton = document.querySelector("#add-right-sample-button");
+	leftSampleButton.addEventListener("mousedown", () => {
+		collectDataInterval = setInterval(() => {
+			addSample("Left");
+			drawSampleOnCanvas(leftSampleContainer);
+			leftSampleCount++;
+		}, 500);
+	});
+	leftSampleButton.addEventListener("mouseup", () => {
+		clearInterval(collectDataInterval);
 	});
 
-	timer = document.querySelector("#timer");
+	rightSampleButton.addEventListener("mousedown", () => {
+		collectDataInterval = setInterval(() => {
+			addSample("Right");
+			drawSampleOnCanvas(rightSampleContainer);
+			rightSampleCount++;
+		}, 500);
+	});
+	rightSampleButton.addEventListener("mouseup", () => {
+		clearInterval(collectDataInterval);
+	});
+
 	posenet = ml5.poseNet(video, modelLoaded);
 	posenet.on("pose", onPose);
 
@@ -94,31 +70,23 @@ function setup() {
 		debug: true,
 	};
 	neuralNetwork = ml5.neuralNetwork(options);
-	state = "Idle";
+}
+
+function addSample(currentLabel) {
+	let inputs = [];
+	for (let i = 0; i < myPose.keypoints.length; i++) {
+		const obj = myPose.keypoints[i];
+		inputs.push(obj.position.x);
+		inputs.push(obj.position.y);
+	}
+	let outputs = [currentLabel];
+	neuralNetwork.addData(inputs, outputs);
 }
 
 function onPose(result) {
 	if (result.length > 0) {
 		myPose = result[0].pose;
 		skeleton = result[0].skeleton;
-		//console.log(myPose);
-		if (state == "collecting") {
-			let inputs = [];
-			for (let i = 0; i < myPose.keypoints.length; i++) {
-				const obj = myPose.keypoints[i];
-				inputs.push(obj.position.x);
-				inputs.push(obj.position.y);
-			}
-			let outputs = [currentLabel];
-			neuralNetwork.addData(inputs, outputs);
-			if (currentLabel == "Left") {
-				drawSampleOnCanvas(leftSampleContainer);
-				leftSampleCount++;
-			} else if (currentLabel == "Right") {
-				drawSampleOnCanvas(rightSampleContainer);
-				rightSampleCount++;
-			}
-		}
 	}
 }
 
