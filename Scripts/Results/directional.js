@@ -12,6 +12,7 @@ class DIRECTIONAL {
 		}
 		if (resultProbability < 75) {
 			repeatClassification();
+			return;
 		}
 		probabilityLabel.innerHTML = `${resultProbability} %`;
 		resultLabel.innerHTML = result.label;
