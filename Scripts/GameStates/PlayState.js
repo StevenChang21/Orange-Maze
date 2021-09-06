@@ -7,7 +7,6 @@ class PlayState extends GameState {
 	}
 
 	start() {
-		this.listenToVisibilityChangedChannel();
 		this.gameSystem.maze.Generate();
 		this.gameSystem.player.Spawn(this.gameSystem.maze);
 		this.destination = this.gameSystem.maze.all_cells[this.gameSystem.maze.all_cells.length - 1];
@@ -38,22 +37,7 @@ class PlayState extends GameState {
 		}
 	}
 
-	listenToVisibilityChangedChannel() {
-		this.onVisibilityChange = () => {
-			const playState = this;
-			setTimeout(() => {
-				if (document.visibilityState !== "hidden") {
-					return;
-				}
-				document.removeEventListener("visibilitychange", this.onVisibilityChange);
-				playState.pause(playState);
-			}, 5 * 1000);
-		};
-		document.addEventListener("visibilitychange", this.onVisibilityChange);
-	}
-
 	continue() {
-		this.listenToVisibilityChangedChannel();
 		this.gameSystem
 			.getClassifierByName("Direction")
 			.classify(this.gameSystem.getFlippedVideo())
