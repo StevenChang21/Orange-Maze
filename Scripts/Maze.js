@@ -1,6 +1,6 @@
 class Maze {
-	rows_number;
-	columns_number;
+	rows;
+	columns;
 	cell_length;
 	all_cells = [];
 
@@ -14,8 +14,8 @@ class Maze {
 
 	SetSize(cell_length, width, height) {
 		this.cell_length = floor(cell_length);
-		this.columns_number = floor(width / cell_length);
-		this.rows_number = floor(height / cell_length);
+		this.columns = floor(width / cell_length);
+		this.rows = floor(height / cell_length);
 	}
 
 	Render(cell_color, wall_color) {
@@ -71,8 +71,8 @@ class Maze {
 
 	AddAllCellsToMaze() {
 		//Add every single cell in the maze to an array so we can get the cell from that array
-		for (let j = 0; j < this.rows_number; j++) {
-			for (let i = 0; i < this.columns_number; i++) {
+		for (let j = 0; j < this.rows; j++) {
+			for (let i = 0; i < this.columns; i++) {
 				let cell = new Cell(i, j, this);
 				this.all_cells.push(cell);
 			}
@@ -89,9 +89,9 @@ class Maze {
 
 	static GetCellIndexByCoordinate(x, y, maze) {
 		//There is an array that holds all the cells in the genrated maze, use the coordinate of the cell to get the index of the cell in that array
-		if (x < 0 || y < 0 || x > maze.columns_number - 1 || y > maze.rows_number - 1) {
+		if (x < 0 || y < 0 || x > maze.columns - 1 || y > maze.rows - 1) {
 			return -1;
 		}
-		return floor(x) + floor(y) * maze.columns_number;
+		return floor(x) + floor(y) * maze.columns;
 	}
 }
