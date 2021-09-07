@@ -9,7 +9,7 @@ class PlayState extends GameState {
 	start() {
 		this.gameSystem.maze.Generate();
 		this.gameSystem.player.Spawn(this.gameSystem.maze);
-		gadget.generate(10, game.maze, this.gameSystem.getAsset("Image").bomb);
+		this.gadgets = gadget.generate(10, game.maze, this.gameSystem.getAsset("Image").bomb);
 		this.destination = this.gameSystem.maze.all_cells[this.gameSystem.maze.all_cells.length - 1];
 
 		const colorAssets = this.gameSystem.getAsset("Color");
@@ -31,6 +31,7 @@ class PlayState extends GameState {
 		this.resultLabels = {
 			class: document.querySelector("#result-label"),
 			probability: document.querySelector("#probability-label"),
+			bomb: document.querySelector("#bomb-count-label"),
 		};
 
 		for (const key in this.resultLabels) {
@@ -65,7 +66,7 @@ class PlayState extends GameState {
 		}
 		this.gameSystem.maze.Render(this.gameColour.mazeWall, this.gameColour.maze);
 		this.gameSystem.player.Render(this.gameColour.player);
-		this.gameSystem.gadgets.forEach((gadget) => {
+		this.gadgets.forEach((gadget) => {
 			gadget.render();
 		});
 		this.checkHasWon();

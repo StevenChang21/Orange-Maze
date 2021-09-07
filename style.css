@@ -152,6 +152,8 @@ blockquote:before {
 	color: #023047;
 	font-family: Arial, Helvetica, sans-serif;
 	display: none;
+	margin: auto;
+	margin-bottom: 1rem;
 }
 
 #defaultCanvas0 {
