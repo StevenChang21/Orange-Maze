@@ -50,6 +50,7 @@ class Maze {
 	}
 
 	ConnectNeighbours(currentCell, neighbourCell) {
+		if (!currentCell || !neighbourCell) return;
 		//Remove the walls to connect the cells(set the target side of the wall to value: False)
 		const bisectorOfDisplacement = createVector(
 			currentCell.absolute_v.y - neighbourCell.absolute_v.y,

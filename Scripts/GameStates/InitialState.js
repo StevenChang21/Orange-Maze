@@ -23,6 +23,7 @@ class InitialState extends GameState {
 			fill(color(252, 166, 82));
 			rect(width / 2 - 50 * 2, height - 50, config.loadedResource * 2, 10);
 			textSize(20);
+			fill(50);
 			text(this.gameStatus, width / 2, height - 100);
 		}
 		textSize(60);

@@ -16,8 +16,15 @@ class Player {
 		this.position = this.cell_in.absolute_v.copy();
 	}
 
-	summonWallDestroyer(onDestroyedWalls) {
-		//console.log("Summoning wall destroyer");
+	destroyWalls(onDestroyedWalls) {
+		if (this.#claimedBombs.length <= 0) {
+			onDestroyedWalls();
+			return;
+		}
+		const usedBomb = this.#claimedBombs.pop();
+		usedBomb.explode(this.cell_in);
+		const label = document.querySelector("#bomb-count-label");
+		label.innerHTML = `${this.#claimedBombs.length} bombs`;
 		onDestroyedWalls();
 	}
 

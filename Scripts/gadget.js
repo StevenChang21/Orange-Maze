@@ -9,6 +9,19 @@ class gadget extends p5.Vector {
 		this.delay = random(0, 100);
 	}
 
+	explode(cell) {
+		function findNeighbourCell(radians) {
+			const x = round(sin(radians));
+			const y = round(cos(radians));
+			const coordinate = p5.Vector.add(cell.vector, createVector(x, y));
+			return cell.maze.GetCellByCoordinate(coordinate.x, coordinate.y);
+		}
+		for (let i = 0; i < TAU; i += PI / 2) {
+			const neighbourCell = findNeighbourCell(i);
+			cell.maze.ConnectNeighbours(cell, neighbourCell);
+		}
+	}
+
 	pick() {
 		this.image = undefined;
 		this.cellIn.content = undefined;
@@ -46,6 +59,7 @@ class gadget extends p5.Vector {
 			const g = new gadget(round(vector.x), round(vector.y), maze, image);
 			gadgets.push(g);
 		}
+		gadgets.push(new gadget(0, 1, maze, image));
 		return gadgets;
 	}
 
