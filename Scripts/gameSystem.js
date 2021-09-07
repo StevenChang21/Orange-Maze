@@ -1,4 +1,6 @@
 class gameSystem {
+	gadgets = [];
+
 	constructor(maze, player) {
 		this.maze = maze;
 		this.player = player;

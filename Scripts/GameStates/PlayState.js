@@ -10,6 +10,8 @@ class PlayState extends GameState {
 		this.gameSystem.maze.Generate();
 		this.gameSystem.player.Spawn(this.gameSystem.maze);
 		this.destination = this.gameSystem.maze.all_cells[this.gameSystem.maze.all_cells.length - 1];
+		gadget.generate([], 2, 3, game.maze);
+		console.log(game.gadgets);
 
 		const colorAssets = this.gameSystem.getAsset("Color");
 
@@ -64,6 +66,10 @@ class PlayState extends GameState {
 		}
 		this.gameSystem.maze.Render(this.gameColour.mazeWall, this.gameColour.maze);
 		this.gameSystem.player.Render(this.gameColour.player);
+		this.gameSystem.gadgets.forEach((gadget) => {
+			gadget.render();
+		});
+		gadget.render();
 		this.checkHasWon();
 	}
 
