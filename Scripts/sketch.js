@@ -74,7 +74,7 @@ function preload() {
 	config.loadAssets(
 		"Image",
 		{
-			bomb: "../Images/bomb.png",
+			bomb: "../Images/bomb2.png",
 		},
 		(source) => {
 			let imgs = {};

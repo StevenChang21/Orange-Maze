@@ -9,7 +9,7 @@ class gadget extends p5.Vector {
 	}
 
 	render() {
-		const Y_position = oscillator.oscillateInCell(this.imageSize, this.position.y, this.delay, 2);
+		const Y_position = oscillator.oscillateInCell(this.imageSize * 0.6, this.position.y, this.delay, 3);
 		image(this.image, this.position.x, Y_position, this.imageSize, this.imageSize);
 	}
 
