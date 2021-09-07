@@ -48,6 +48,17 @@ class gadget extends p5.Vector {
 			center: centerCell.absolute_v,
 		};
 		const gadgets = [];
+
+		function hasDuplicate(vector) {
+			if (gadgets.length <= 0) return false;
+			for (let i = 0; i < gadgets.length; i++) {
+				if (gadgets[i].dist(vector) <= 0.01) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		for (let i = 0; i < numGadgets; i++) {
 			const randomisedDirection = p5.Vector.random2D();
 			const Θ = atan2(randomisedDirection.x, randomisedDirection.y);
@@ -57,6 +68,10 @@ class gadget extends p5.Vector {
 			vector.mult(random(0.1, 0.9));
 			vector.add(mazeCenterPoint);
 			const g = new gadget(round(vector.x), round(vector.y), maze, image);
+			if (hasDuplicate(g)) {
+				i--;
+				continue;
+			}
 			gadgets.push(g);
 		}
 		gadgets.push(new gadget(0, 1, maze, image));

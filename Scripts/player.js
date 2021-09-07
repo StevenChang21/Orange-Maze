@@ -7,6 +7,7 @@ class Player {
 		this.cell_in = spawning_point ? maze.GetCellByCoordinate(spawning_point.x, spawning_point.y) : maze.GetCellByCoordinate(0, 0);
 		this.target_cell = this.cell_in;
 		this.isMoving = false;
+		this.hasCooledDown = true;
 
 		if (!this.cell_in) {
 			console.error("Player is not spawn in a maze !\nThe game cannot start!");
@@ -17,7 +18,7 @@ class Player {
 	}
 
 	destroyWalls(onDestroyedWalls) {
-		if (this.#claimedBombs.length <= 0) {
+		if (this.#claimedBombs.length <= 0 || !this.hasCooledDown) {
 			onDestroyedWalls();
 			return;
 		}
@@ -25,6 +26,8 @@ class Player {
 		usedBomb.explode(this.cell_in);
 		const label = document.querySelector("#bomb-count-label");
 		label.innerHTML = `${this.#claimedBombs.length} bombs`;
+		this.hasCooledDown = false;
+		setTimeout(() => (this.hasCooledDown = !this.hasCooledDown), 3000);
 		onDestroyedWalls();
 	}
 
