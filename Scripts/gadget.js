@@ -1,12 +1,11 @@
 class gadget extends p5.Vector {
 	constructor(x, y, maze) {
 		super(x, y);
-		console.log(x, y);
 		this.cellIn = maze.GetCellByCoordinate(x, y);
-		this.position = p5.Vector.add(this.cellIn.absolute_v, createVector(1, 1).mult(maze.cell_length / 2));
 	}
 
 	render() {
+		fill(20);
 		ellipse(this.position.x, this.position.y, 20, 20);
 	}
 
@@ -34,7 +33,7 @@ class gadget extends p5.Vector {
 		const Half_Y_AxisMagnitude = maze.rows / 2;
 		this.mazeInfo = {
 			maze,
-			mazeCenterPoint,
+			center: centerCell.absolute_v,
 		};
 
 		function checkCoordinateDuplication(collection, coordinate) {
@@ -53,11 +52,10 @@ class gadget extends p5.Vector {
 			const Θ = atan2(randomisedDirection.x, randomisedDirection.y);
 			const x = sin(Θ) * Half_X_AxisMagnitude;
 			const y = cos(Θ) * Half_Y_AxisMagnitude;
-			const v = createVector(x, y);
-			v.mult(random(0.1, 1));
-			v.add(mazeCenterPoint);
-			console.log(v);
-			const g = new gadget(round(v.x), round(v.y), maze);
+			const vector = createVector(x, y);
+			vector.mult(random(0.1, 0.9));
+			vector.add(mazeCenterPoint);
+			const g = new gadget(round(vector.x), round(vector.y), maze);
 			if (checkCoordinateDuplication(unplacebleCoordinates, g) && checkCoordinateDuplication(game.gadgets, g)) {
 				game.gadgets.push(g);
 			} else {
@@ -67,12 +65,10 @@ class gadget extends p5.Vector {
 	}
 
 	static render() {
-		const { maze, mazeCenterPoint } = this.mazeInfo;
+		const { maze, center } = this.mazeInfo;
 		strokeWeight(4);
-		const centerCell = maze.GetCellByCoordinate(mazeCenterPoint.x, mazeCenterPoint.y).absolute_v;
-
 		noFill();
 		stroke(30);
-		ellipse(centerCell.x, centerCell.y, maze.columns * maze.cell_length, maze.rows * maze.cell_length);
+		ellipse(center.x, center.y, maze.columns * maze.cell_length * 0.9, maze.rows * maze.cell_length * 0.9);
 	}
 }
