@@ -7,8 +7,8 @@ class InitialState extends GameState {
 	}
 
 	initiate() {
-		this.instructionText = "Ready? Press ENTER \n to start the game !!!";
 		fill(this.gameSystem.getAsset("Color")["text"]);
+		this.instructionText = "Ready? Press ENTER \n to start the game !!!";
 	}
 
 	start() {

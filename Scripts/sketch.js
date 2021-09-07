@@ -71,6 +71,22 @@ function preload() {
 		difficultyAcceleration: 0.5,
 	});
 
+	config.loadAssets(
+		"Image",
+		{
+			bomb: "../Images/bomb.png",
+		},
+		(source) => {
+			let imgs = {};
+			for (const key in source) {
+				loadImage(source[key], (img) => {
+					imgs[key] = img;
+				});
+			}
+			return imgs;
+		}
+	);
+
 	//Colors
 	config.loadAssets(
 		"Color",
@@ -93,6 +109,7 @@ function preload() {
 }
 
 function setup() {
+	imageMode(CENTER);
 	createCanvas(900, 700).parent("canvas-container");
 	const maze = new Maze(50, width, height);
 	game = new gameSystem(maze, new Player());

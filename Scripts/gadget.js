@@ -1,28 +1,19 @@
 class gadget extends p5.Vector {
-	constructor(x, y, maze) {
+	constructor(x, y, maze, image) {
 		super(x, y);
 		this.cellIn = maze.GetCellByCoordinate(x, y);
+		this.position = p5.Vector.add(this.cellIn.absolute_v, createVector(1, 1).mult(maze.cell_length / 2));
+		this.image = image;
+		this.imageSize = maze.cell_length * 0.5;
+		this.delay = random(0, 100);
 	}
 
 	render() {
-		fill(20);
-		ellipse(this.position.x, this.position.y, 20, 20);
+		const Y_position = oscillator.oscillateInCell(this.imageSize, this.position.y, this.delay, 2);
+		image(this.image, this.position.x, Y_position, this.imageSize, this.imageSize);
 	}
 
-	static generate(occupiedCells, offset, numGadgets, maze) {
-		const unplacebleCoordinates = [];
-		occupiedCells.forEach((cell) => {
-			for (let i = 0; i < TAU; i += PI / 2) {
-				const x = round(sin(i));
-				const y = round(cos(i));
-				const rot = createVector(x, y);
-				for (let j = 0; j < offset; j++) {
-					const unplacebleCoordinate = p5.Vector.add(cell.vector, rot.mult(j + 1));
-					unplacebleCoordinates.push(unplacebleCoordinate);
-				}
-			}
-		});
-
+	static generate(numGadgets, maze, image) {
 		function axisCenter(quantity) {
 			return round(quantity) / 2;
 		}
@@ -36,17 +27,6 @@ class gadget extends p5.Vector {
 			center: centerCell.absolute_v,
 		};
 
-		function checkCoordinateDuplication(collection, coordinate) {
-			if (collection.length === 0) return true;
-			for (let j = 0; j < collection.length; j++) {
-				if (collection[j].dist(coordinate) <= 0.01) {
-					return false;
-				} else if (j === collection.length - 1) {
-					return true;
-				}
-			}
-		}
-
 		for (let i = 0; i < numGadgets; i++) {
 			const randomisedDirection = p5.Vector.random2D();
 			const Θ = atan2(randomisedDirection.x, randomisedDirection.y);
@@ -55,12 +35,8 @@ class gadget extends p5.Vector {
 			const vector = createVector(x, y);
 			vector.mult(random(0.1, 0.9));
 			vector.add(mazeCenterPoint);
-			const g = new gadget(round(vector.x), round(vector.y), maze);
-			if (checkCoordinateDuplication(unplacebleCoordinates, g) && checkCoordinateDuplication(game.gadgets, g)) {
-				game.gadgets.push(g);
-			} else {
-				i--;
-			}
+			const g = new gadget(round(vector.x), round(vector.y), maze, image);
+			game.gadgets.push(g);
 		}
 	}
 
