@@ -6,6 +6,7 @@ class WonState extends GameState {
 
 	start() {
 		fill(this.gameSystem.getAsset("Color")["text"]);
+		this.gameSystem.level++;
 	}
 
 	modifyDifficulty() {

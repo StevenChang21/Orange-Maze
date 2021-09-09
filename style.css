@@ -123,6 +123,13 @@ blockquote:before {
 	padding-top: 1rem;
 }
 
+#level-label {
+	color: #fff;
+	text-align: center;
+	font-size: xx-large;
+	display: none;
+}
+
 #game-container {
 	margin: 2rem 0;
 	display: flex;

@@ -32,7 +32,10 @@ class PlayState extends GameState {
 			class: document.querySelector("#result-label"),
 			probability: document.querySelector("#probability-label"),
 			bomb: document.querySelector("#bomb-count-label"),
+			level: document.querySelector("#level-label"),
 		};
+
+		this.resultLabels.level.innerHTML = `Level ${this.gameSystem.level}`;
 
 		for (const key in this.resultLabels) {
 			this.resultLabels[key].style.display = "block";

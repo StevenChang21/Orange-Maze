@@ -1,5 +1,5 @@
 class Player {
-	speed = 5;
+	#speed = 5;
 	#claimedBombs = [];
 
 	Spawn(maze, spawning_point = null) {
@@ -33,7 +33,7 @@ class Player {
 
 	Render(fill_color, side_color = null) {
 		if (this.target_cell.vector.dist(this.cell_in.vector) > 0) {
-			this.position.lerp(this.target_cell.absolute_v, this.speed * deltaTime * 0.001);
+			this.position.lerp(this.target_cell.absolute_v, this.#speed * deltaTime * 0.001);
 			if (this.target_cell.absolute_v.dist(this.position) <= 0.01) {
 				this.isMoving = false;
 				this.cell_in = this.target_cell;

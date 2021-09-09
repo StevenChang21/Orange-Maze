@@ -1,4 +1,6 @@
 class gameSystem {
+	level = 1;
+
 	constructor(maze, player) {
 		this.maze = maze;
 		this.player = player;
