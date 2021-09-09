@@ -74,7 +74,6 @@ class gadget extends p5.Vector {
 			}
 			gadgets.push(g);
 		}
-		gadgets.push(new gadget(0, 1, maze, image));
 		return gadgets;
 	}
 
