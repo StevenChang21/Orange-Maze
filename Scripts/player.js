@@ -1,10 +1,12 @@
 class Player {
 	#speed = 5;
 	#claimedBombs = [];
+	#animationSheet;
 
-	Spawn(maze, spawning_point = null) {
+	Spawn(maze, animationSheet = undefined, spawning_point = undefined) {
 		this.maze = maze;
 		this.cell_in = spawning_point ? maze.GetCellByCoordinate(spawning_point.x, spawning_point.y) : maze.GetCellByCoordinate(0, 0);
+		this.#animationSheet = animationSheet;
 		this.target_cell = this.cell_in;
 		this.isMoving = false;
 		this.hasCooledDown = true;

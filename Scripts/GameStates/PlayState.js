@@ -8,7 +8,7 @@ class PlayState extends GameState {
 
 	start() {
 		this.gameSystem.maze.Generate();
-		this.gameSystem.player.Spawn(this.gameSystem.maze);
+		this.gameSystem.player.Spawn(this.gameSystem.maze, this.gameSystem.getAsset("AnimationSheet"));
 		this.gadgets = gadget.generate(this.gameSystem.level * 2, game.maze, this.gameSystem.getAsset("Image").bomb);
 		this.destination = this.gameSystem.maze.all_cells[this.gameSystem.maze.all_cells.length - 1];
 
