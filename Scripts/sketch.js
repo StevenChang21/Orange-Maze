@@ -81,6 +81,7 @@ function preload() {
 			for (const key in source) {
 				loadImage(source[key], (img) => {
 					imgs[key] = img;
+					config.onAssetReady();
 				});
 			}
 			return imgs;
@@ -90,24 +91,48 @@ function preload() {
 	config.loadAssets(
 		"AnimationSheet",
 		{
-			up: ["../Images/MoveAnim-sheet/Front.jpeg"],
-			down: ["../Images/MoveAnim-sheet/Back.jpeg"],
-			left: ["../Images/MoveAnim-sheet/Left.jpeg"],
-			right: ["../Images/MoveAnim-sheet/Right.jpeg"],
+			up: [
+				"../Images/MoveAnim-sheet/Front.jpeg",
+				"../Images/MoveAnim-sheet/Front (1).jpeg",
+				"../Images/MoveAnim-sheet/Front (2).jpeg",
+				"../Images/MoveAnim-sheet/Front (3).jpeg",
+				"../Images/MoveAnim-sheet/Front (4).jpeg",
+			],
+			down: [
+				"../Images/MoveAnim-sheet/Back.jpeg",
+				"../Images/MoveAnim-sheet/Back (1).jpeg",
+				"../Images/MoveAnim-sheet/Back (2).jpeg",
+				"../Images/MoveAnim-sheet/Back (3).jpeg",
+				"../Images/MoveAnim-sheet/Back (4).jpeg",
+			],
+			left: [
+				"../Images/MoveAnim-sheet/Left.jpeg",
+				"../Images/MoveAnim-sheet/Left (2).jpeg",
+				"../Images/MoveAnim-sheet/Left (3).jpeg",
+				"../Images/MoveAnim-sheet/Left (4).jpeg",
+				"../Images/MoveAnim-sheet/Left (5).jpeg",
+			],
+			right: [
+				"../Images/MoveAnim-sheet/Right.jpeg",
+				"../Images/MoveAnim-sheet/Right (1).jpeg",
+				"../Images/MoveAnim-sheet/Right (2).jpeg",
+				"../Images/MoveAnim-sheet/Right (3).jpeg",
+				"../Images/MoveAnim-sheet/Right (4).jpeg",
+			],
 		},
 		(source) => {
-			const sheets = [];
 			let animationSheet = {};
 			for (const key in source) {
+				const sheets = [];
 				source[key].forEach((frame) => {
 					loadImage(frame, (img) => {
 						sheets.push(img);
-						config.onAssetReady();
+						if (sheets.length >= source[key].length) config.onAssetReady();
 					});
 				});
 				animationSheet[key] = sheets;
 			}
-			return sheets;
+			return animationSheet;
 		}
 	);
 

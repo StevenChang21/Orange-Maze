@@ -23,7 +23,7 @@ class configuration {
 	}
 
 	loadAssets(assetType, sources, getData = undefined) {
-		this.assetCount += Object.keys(sources).length;
+		Object.keys(sources).length <= 0 ? this.assetCount++ : (this.assetCount += Object.keys(sources).length);
 		const dataGetter = getData
 			? getData
 			: (sources) => {
