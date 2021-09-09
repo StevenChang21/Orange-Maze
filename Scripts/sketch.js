@@ -87,6 +87,30 @@ function preload() {
 		}
 	);
 
+	config.loadAssets(
+		"AnimationSheet",
+		{
+			up: ["../Images/MoveAnim-sheet/Front.jpeg"],
+			down: ["../Images/MoveAnim-sheet/Back.jpeg"],
+			left: ["../Images/MoveAnim-sheet/Left.jpeg"],
+			right: ["../Images/MoveAnim-sheet/Right.jpeg"],
+		},
+		(source) => {
+			const sheets = [];
+			let animationSheet = {};
+			for (const key in source) {
+				source[key].forEach((frame) => {
+					loadImage(frame, (img) => {
+						sheets.push(img);
+						config.onAssetReady();
+					});
+				});
+				animationSheet[key] = sheets;
+			}
+			return sheets;
+		}
+	);
+
 	//Colors
 	config.loadAssets(
 		"Color",
