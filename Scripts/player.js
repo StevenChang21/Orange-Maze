@@ -1,6 +1,10 @@
 class Player {
 	#speed = 5;
 	#claimedBombs = [];
+	#currentFrame = {
+		ctx: undefined,
+		index: 0,
+	};
 	#animationSheet;
 
 	Spawn(maze, animationSheet = undefined, spawning_point = undefined) {
@@ -8,7 +12,10 @@ class Player {
 		this.cell_in = spawning_point ? maze.GetCellByCoordinate(spawning_point.x, spawning_point.y) : maze.GetCellByCoordinate(0, 0);
 		this.#animationSheet = animationSheet;
 		this.target_cell = this.cell_in;
-		this.isMoving = false;
+		this.movement = {
+			isMoving: false,
+			direction: undefined,
+		};
 		this.hasCooledDown = true;
 
 		if (!this.cell_in) {
@@ -35,33 +42,45 @@ class Player {
 
 	Render(fill_color, side_color = null) {
 		if (this.target_cell.vector.dist(this.cell_in.vector) > 0) {
-			this.position.lerp(this.target_cell.absolute_v, this.#speed * deltaTime * 0.001);
+			const dir = directions[this.movement.direction];
+			this.position.add(createVector(dir.x, dir.y).mult(this.#speed));
+			// this.position.lerp(this.target_cell.absolute_v, this.#speed * deltaTime * 0.001);
 			if (this.target_cell.absolute_v.dist(this.position) <= 0.01) {
-				this.isMoving = false;
+				this.movement.isMoving = false;
 				this.cell_in = this.target_cell;
 
 				this.onReachDestination();
 			}
 		}
-
-		const size = this.maze.cell_length - 10;
-		const offset = (this.maze.cell_length - size) / 2;
-		fill(fill_color);
-		rect(this.position.x + offset, this.position.y + offset, size, size);
-
-		if (side_color) {
-			stroke(side_color);
-			strokeWeight(0.5);
+		this.#currentFrame.index += 1;
+		const offset = this.maze.cell_length / 2;
+		const spritePos = p5.Vector.add(this.position, createVector(1, 1).mult(offset));
+		if (this.movement.isMoving && this.#animationSheet) {
+			const frameIndex = this.#currentFrame.index % this.#animationSheet[this.movement.direction].length;
+			image(this.#animationSheet[this.movement.direction][frameIndex], spritePos.x, spritePos.y);
+			this.#currentFrame = {
+				ctx: this.#animationSheet[this.movement.direction][0],
+				index: frameIndex,
+			};
+			return;
+		}
+		if (this.#currentFrame.ctx) {
+			image(this.#currentFrame.ctx, spritePos.x, spritePos.y);
+			return;
+		} else {
+			image(this.#animationSheet["Right"][0], spritePos.x, spritePos.y);
+			this.#currentFrame.ctx = this.#animationSheet["Right"][0];
 		}
 	}
 
 	Move(direction, onReachDestination) {
-		if (this.isMoving) return;
+		if (this.movement.isMoving) return;
 		if (this.blockByWall(direction)) {
 			onReachDestination();
 			return;
 		}
-		this.isMoving = true;
+		this.movement.isMoving = true;
+		this.movement.direction = direction;
 		const movingDir = directions[direction];
 		const targetCellPosition = p5.Vector.add(createVector(movingDir.x, movingDir.y), this.cell_in.vector);
 		this.target_cell = this.maze.GetCellByCoordinate(targetCellPosition.x, targetCellPosition.y);

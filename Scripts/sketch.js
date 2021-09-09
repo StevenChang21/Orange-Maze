@@ -91,28 +91,28 @@ function preload() {
 	config.loadAssets(
 		"AnimationSheet",
 		{
-			up: [
+			Up: [
 				"../Images/MoveAnim-sheet/Front.jpeg",
 				"../Images/MoveAnim-sheet/Front (1).jpeg",
 				"../Images/MoveAnim-sheet/Front (2).jpeg",
 				"../Images/MoveAnim-sheet/Front (3).jpeg",
 				"../Images/MoveAnim-sheet/Front (4).jpeg",
 			],
-			down: [
+			Down: [
 				"../Images/MoveAnim-sheet/Back.jpeg",
 				"../Images/MoveAnim-sheet/Back (1).jpeg",
 				"../Images/MoveAnim-sheet/Back (2).jpeg",
 				"../Images/MoveAnim-sheet/Back (3).jpeg",
 				"../Images/MoveAnim-sheet/Back (4).jpeg",
 			],
-			left: [
+			Left: [
 				"../Images/MoveAnim-sheet/Left.jpeg",
 				"../Images/MoveAnim-sheet/Left (2).jpeg",
 				"../Images/MoveAnim-sheet/Left (3).jpeg",
 				"../Images/MoveAnim-sheet/Left (4).jpeg",
 				"../Images/MoveAnim-sheet/Left (5).jpeg",
 			],
-			right: [
+			Right: [
 				"../Images/MoveAnim-sheet/Right.jpeg",
 				"../Images/MoveAnim-sheet/Right (1).jpeg",
 				"../Images/MoveAnim-sheet/Right (2).jpeg",
