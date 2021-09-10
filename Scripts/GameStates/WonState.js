@@ -18,7 +18,7 @@ class WonState extends GameState {
 
 	execute() {
 		textSize(50);
-		text("CONGRATS \n You have cleared this level !!!\n Press ENTER to go next level", oscillator.oscillateInCanvas(width, 1, 300, 0), 200);
+		text("CONGRATS \n You have cleared this level !!!\n Press ENTER to go next level", oscillator.oscillateInCanvas(width, 1.5, 300, 0), 200);
 
 		if (keyIsPressed && keyIsDown(ENTER)) {
 			this.modifyDifficulty();

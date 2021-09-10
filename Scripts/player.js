@@ -42,7 +42,7 @@ class Player {
 		onDestroyedWalls();
 	}
 
-	Render(fill_color, side_color = null) {
+	Render() {
 		if (this.target_cell.vector.dist(this.cell_in.vector) > 0) {
 			const dir = directions[this.movement.direction];
 			this.position.add(createVector(dir.x, dir.y).mult(this.#speed * deltaTime * 0.001));

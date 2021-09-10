@@ -23,7 +23,8 @@ function preload() {
 			Direction: {
 				//version 1: "https://teachablemachine.withgoogle.com/models/7WRHgCGqz/"
 				//version 2: "https://teachablemachine.withgoogle.com/models/WXBWVjQDX/"
-				source: "https://teachablemachine.withgoogle.com/models/ORW4hdSSa/",
+				//version 3: "https://teachablemachine.withgoogle.com/models/ORW4hdSSa/"
+				source: "https://teachablemachine.withgoogle.com/models/pRKaPbQkT/",
 				instanceName: "imageClassifier",
 			},
 			Vertical: {
@@ -100,8 +101,8 @@ function preload() {
 			],
 			Up: [
 				"../Images/MoveAnim-sheet/Back.jpeg",
-				"../Images/MoveAnim-sheet/Back (2).jpeg",
 				"../Images/MoveAnim-sheet/Back (1).jpeg",
+				"../Images/MoveAnim-sheet/Back (2).jpeg",
 				"../Images/MoveAnim-sheet/Back (3).jpeg",
 				"../Images/MoveAnim-sheet/Back (4).jpeg",
 			],
@@ -123,12 +124,18 @@ function preload() {
 		(source) => {
 			let animationSheet = {};
 			for (const key in source) {
+				const indexedSheets = [];
 				const sheets = [];
 				source[key].forEach((frame) => {
 					loadImage(frame, (img) => {
-						sheets.push(img);
-						console.log({ img, frame });
-						if (sheets.length >= source[key].length) config.onAssetReady();
+						indexedSheets.push({ img, index: source[key].indexOf(frame) });
+						if (indexedSheets.length >= source[key].length) {
+							indexedSheets.sort((a, b) => a.index - b.index);
+							indexedSheets.forEach((sheet) => {
+								sheets.push(sheet.img);
+							});
+							config.onAssetReady();
+						}
 					});
 				});
 				animationSheet[key] = sheets;
@@ -144,10 +151,8 @@ function preload() {
 			background: color("#fd9e02"),
 			maze: color("#DF711B"),
 			mazeWall: color(255, 213, 126),
-			player: color("#64C9CF"),
 			target: color(255),
 			text: color("#023047"),
-			button: color(100),
 		},
 		(source) => {
 			for (let i = 0; i < Object.keys(source).length; i++) {

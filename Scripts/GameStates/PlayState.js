@@ -68,7 +68,7 @@ class PlayState extends GameState {
 			return;
 		}
 		this.gameSystem.maze.Render(this.gameColour.mazeWall, this.gameColour.maze);
-		this.gameSystem.player.Render(this.gameColour.player);
+		this.gameSystem.player.Render();
 		this.gadgets.forEach((gadget) => {
 			gadget.render();
 		});
