@@ -6,6 +6,7 @@ class Player {
 		index: 0,
 	};
 	#animationSheet;
+	#moveDuration = 1.2;
 
 	Spawn(maze, animationSheet = undefined, spawning_point = undefined) {
 		this.maze = maze;
@@ -24,6 +25,7 @@ class Player {
 		}
 
 		this.position = this.cell_in.absolute_v.copy();
+		this.#speed = this.maze.cell_length / this.#moveDuration;
 	}
 
 	destroyWalls(onDestroyedWalls) {
@@ -43,15 +45,16 @@ class Player {
 	Render(fill_color, side_color = null) {
 		if (this.target_cell.vector.dist(this.cell_in.vector) > 0) {
 			const dir = directions[this.movement.direction];
-			this.position.add(createVector(dir.x, dir.y).mult(this.#speed));
+			this.position.add(createVector(dir.x, dir.y).mult(this.#speed * deltaTime * 0.001));
 			// this.position.lerp(this.target_cell.absolute_v, this.#speed * deltaTime * 0.001);
-			if (this.target_cell.absolute_v.dist(this.position) <= 0.01) {
+			if (this.target_cell.absolute_v.dist(this.position).toFixed(3) <= 5) {
 				this.movement.isMoving = false;
 				this.cell_in = this.target_cell;
 
 				this.onReachDestination();
 			}
 		}
+		frameRate(30);
 		this.#currentFrame.index += 1;
 		const offset = this.maze.cell_length / 2;
 		const spritePos = p5.Vector.add(this.position, createVector(1, 1).mult(offset));
@@ -64,8 +67,8 @@ class Player {
 			};
 			return;
 		}
-		if (this.#currentFrame.ctx) {
-			image(this.#currentFrame.ctx, spritePos.x, spritePos.y);
+		if (this.movement.direction && !this.movement.isMoving) {
+			image(this.#animationSheet[this.movement.direction][0], spritePos.x, spritePos.y);
 			return;
 		} else {
 			image(this.#animationSheet["Right"][0], spritePos.x, spritePos.y);

@@ -91,17 +91,17 @@ function preload() {
 	config.loadAssets(
 		"AnimationSheet",
 		{
-			Up: [
+			Down: [
 				"../Images/MoveAnim-sheet/Front.jpeg",
 				"../Images/MoveAnim-sheet/Front (1).jpeg",
 				"../Images/MoveAnim-sheet/Front (2).jpeg",
 				"../Images/MoveAnim-sheet/Front (3).jpeg",
 				"../Images/MoveAnim-sheet/Front (4).jpeg",
 			],
-			Down: [
+			Up: [
 				"../Images/MoveAnim-sheet/Back.jpeg",
-				"../Images/MoveAnim-sheet/Back (1).jpeg",
 				"../Images/MoveAnim-sheet/Back (2).jpeg",
+				"../Images/MoveAnim-sheet/Back (1).jpeg",
 				"../Images/MoveAnim-sheet/Back (3).jpeg",
 				"../Images/MoveAnim-sheet/Back (4).jpeg",
 			],
@@ -127,6 +127,7 @@ function preload() {
 				source[key].forEach((frame) => {
 					loadImage(frame, (img) => {
 						sheets.push(img);
+						console.log({ img, frame });
 						if (sheets.length >= source[key].length) config.onAssetReady();
 					});
 				});
