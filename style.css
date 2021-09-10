@@ -25,6 +25,19 @@ header img {
 	width: 70px;
 }
 
+header h1 {
+	color: #fff;
+	background: #fd9e02;
+	padding: 0.2rem 0.5rem;
+	border-radius: 1rem;
+}
+
+header h1:hover {
+	background: #fb8500;
+	transition: all 0.2s ease-out;
+	cursor: default;
+}
+
 #tutorial-container {
 	background: #fd9e02;
 	display: flex;
@@ -226,4 +239,43 @@ button {
 	justify-items: end;
 	align-items: center;
 	column-gap: 0.5rem;
+}
+
+footer {
+	background: #fd9e02;
+	color: #fff;
+}
+
+#footer-ctx-container {
+	width: 90%;
+	height: 25vh;
+	margin: auto;
+	display: flex;
+}
+
+#team-members-list {
+	margin: 0;
+	padding: 0 1rem;
+}
+
+#team-members-list li {
+	margin-bottom: 0.3rem;
+}
+
+footer a {
+	color: #fff;
+	text-decoration: none;
+	margin-bottom: 0.3rem;
+}
+
+footer a:hover {
+	color: #023047;
+	transition: all 0.2s ease-out;
+}
+
+.footer-item {
+	display: flex;
+	flex-direction: column;
+	margin-right: 4rem;
+	margin-top: 2rem;
 }
