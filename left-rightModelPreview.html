@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Left-Right model</title>
+		<style>
+			html,
+			body {
+				display: flex;
+				justify-content: center;
+				text-align: center;
+				flex-direction: column;
+				margin: 0;
+				padding: 0;
+				font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+				background: #fd9e02;
+			}
+
+			#main-container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: #fff;
+				margin: 2rem 0;
+			}
+
+			#canvas-container {
+				padding: 2rem 0;
+			}
+
+			.result-labels {
+				display: flex;
+				justify-content: center;
+				margin: 2rem;
+				background: rgba(2, 48, 71, 1);
+				border: #8ecae6 solid 0.4rem;
+				border-radius: 1rem;
+			}
+
+			.probability {
+				width: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main-container">
+			<div id="canvas-container"></div>
+			<div style="margin-left: 1.5rem; width: 30%">
+				<div class="result-labels" id="left-result-labels">
+					<h2 class="result-label">Left</h2>
+					<h2 class="probability" id="left-probability">x %</h2>
+				</div>
+				<div class="result-labels" id="right-result-labels">
+					<h2 class="result-label">Right</h2>
+					<h2 class="probability" id="right-probability">x %</h2>
+				</div>
+			</div>
+		</div>
+
+		<script src="./Scripts/left-rightModelSketch.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+		<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+	</body>
+</html>
