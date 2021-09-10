@@ -76,7 +76,7 @@ class PlayState extends GameState {
 	}
 
 	checkHasWon() {
-		this.destination.Show(this.gameColour.mazeWall, this.gameColour.target);
+		this.destination.Show(this.gameColour.target, this.gameColour.mazeWall);
 		if (this.gameSystem.player.cell_in === this.destination) {
 			//|| key == "w") {
 			document.removeEventListener("visibilitychange", this.onVisibilityChange);

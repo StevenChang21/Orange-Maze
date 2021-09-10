@@ -177,15 +177,18 @@ button {
 }
 
 .expandible:hover {
+	cursor: pointer;
 	background: #ffb703;
 	transform: scale(1.25);
 	color: #fff;
-	transition: transform 0.2s;
+	transition: transform 0.2s ease-out;
 }
 
 #color-editor-button:hover {
+	cursor: pointer;
 	background: #ffb703;
 	color: #fff;
+	transition: all 0.2s ease-out;
 }
 
 .editor-button {

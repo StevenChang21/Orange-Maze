@@ -151,7 +151,7 @@ function preload() {
 			background: color("#fd9e02"),
 			maze: color("#DF711B"),
 			mazeWall: color(255, 213, 126),
-			target: color(255),
+			target: color("#8ecae6"),
 			text: color("#023047"),
 		},
 		(source) => {
